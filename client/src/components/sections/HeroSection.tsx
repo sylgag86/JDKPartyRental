@@ -69,16 +69,21 @@ export default function HeroSection() {
             </div>
           </div>
           
-          {/* Hero Image */}
+          {/* Hero Video */}
           <div className="lg:w-1/2 relative animate-float">
             <div className="relative">
-              <img 
-                src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=700&q=80" 
-                alt="JDK 360 Photo Booth Experience" 
-                className="rounded-xl shadow-2xl relative z-10 max-w-full h-auto"
-              />
+              <div className="rounded-xl shadow-2xl relative z-10 overflow-hidden w-full aspect-[9/16] md:aspect-video">
+                <iframe 
+                  src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F100089247457004%2Fvideos%2F651341327868884%2F&show_text=false" 
+                  className="w-full h-full border-0"
+                  scrolling="no"
+                  frameBorder="0"
+                  allowFullScreen={true}
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                ></iframe>
+              </div>
               
-              {/* Glow Effect around image */}
+              {/* Glow Effect around video */}
               <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[hsl(var(--neon-blue))] to-[hsl(var(--neon-pink))] opacity-50 blur-xl z-0"></div>
               
               {/* Floating elements */}

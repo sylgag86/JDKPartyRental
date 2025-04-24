@@ -25,17 +25,17 @@ export const gallery = [
     description: "Electric blue vibes for an unforgettable experience"
   },
   {
-    image: "/assets/gallery/IMG_0573.jpeg",
+    image: "/assets/gallery/banner-blue.png",
     title: "Birthday Parties",
     description: "Celebrate another year with stunning 360° photos"
   },
   {
-    image: "/assets/gallery/IMG_0574.jpeg",
+    image: "/assets/gallery/banner-green.png",
     title: "Corporate Events",
     description: "Elevate your company gatherings with interactive entertainment"
   },
   {
-    image: "/assets/gallery/IMG_0575.jpeg",
+    image: "/assets/gallery/IMG_0574.jpeg",
     title: "Baby Showers",
     description: "Create magical memories for the mom-to-be"
   }
