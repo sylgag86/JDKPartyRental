@@ -158,7 +158,7 @@ export default function AdminPage() {
   };
   
   return (
-    <div className="min-h-screen bg-[hsl(var(--dark-bg))] py-10">
+    <div className="min-h-screen bg-[hsl(var(--dark-bg))] py-10 pt-[85px]"> {/* Added padding for fixed navbar */}
       <Container>
         <div className="mb-8">
           <Heading
