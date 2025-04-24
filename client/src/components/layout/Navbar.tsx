@@ -6,6 +6,7 @@ import { smoothScrollTo } from '@/lib/utils';
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [floatDirection, setFloatDirection] = useState(1); // 1 for up, -1 for down
 
   // Toggle mobile menu
   const toggleMobileMenu = () => {
@@ -32,9 +33,29 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Create floating animation effect
+  useEffect(() => {
+    const floatInterval = setInterval(() => {
+      setFloatDirection(prev => prev * -1); // Toggle between up and down
+    }, 2000); // Change direction every 2 seconds
+    
+    return () => clearInterval(floatInterval);
+  }, []);
+
   return (
-    <nav className={`fixed top-0 left-0 w-full bg-[hsl(var(--dark-bg))] z-50 content-above-particles transition-all duration-300 ${scrolled ? 'bg-opacity-90 backdrop-filter backdrop-blur-lg shadow-lg' : 'bg-opacity-50'}`}>
-      <Container className="py-3 md:py-4">
+    <nav 
+      className={`fixed top-0 left-0 w-full z-50 content-above-particles transition-all duration-700 ${
+        scrolled ? 'bg-opacity-90 backdrop-filter backdrop-blur-lg shadow-neon-blue' : 'bg-opacity-40'
+      }`}
+      style={{
+        backgroundColor: 'hsla(var(--dark-bg) / 0.7)',
+        transform: `translateY(${floatDirection * 3}px)`,
+        transition: 'transform 2s ease-in-out, background-color 0.3s, box-shadow 0.3s'
+      }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-r from-[hsla(var(--neon-blue)/0.1)] to-[hsla(var(--neon-pink)/0.1)] opacity-70"></div>
+      
+      <Container className="py-3 md:py-4 relative">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2" onClick={() => handleNavClick('hero')}>
@@ -46,35 +67,35 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-8">
             <a 
               href="#services" 
-              className="font-medium hover:text-[hsl(var(--neon-blue))] transition-colors"
+              className="font-medium hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors"
               onClick={(e) => { e.preventDefault(); handleNavClick('services'); }}
             >
               Services
             </a>
             <a 
               href="#gallery" 
-              className="font-medium hover:text-[hsl(var(--neon-blue))] transition-colors"
+              className="font-medium hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors"
               onClick={(e) => { e.preventDefault(); handleNavClick('gallery'); }}
             >
               Gallery
             </a>
             <a 
               href="#features" 
-              className="font-medium hover:text-[hsl(var(--neon-blue))] transition-colors"
+              className="font-medium hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors"
               onClick={(e) => { e.preventDefault(); handleNavClick('features'); }}
             >
               Features
             </a>
             <a 
               href="#testimonials" 
-              className="font-medium hover:text-[hsl(var(--neon-blue))] transition-colors"
+              className="font-medium hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors"
               onClick={(e) => { e.preventDefault(); handleNavClick('testimonials'); }}
             >
               Testimonials
             </a>
             <a 
               href="#contact" 
-              className="font-medium hover:text-[hsl(var(--neon-blue))] transition-colors"
+              className="font-medium hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors"
               onClick={(e) => { e.preventDefault(); handleNavClick('contact'); }}
             >
               Contact
@@ -86,6 +107,7 @@ export default function Navbar() {
             color="blue" 
             size="sm"
             onClick={() => handleNavClick('book-now')}
+            className="animate-pulse-slow"
           >
             Book Now
           </NeonButton>
@@ -107,35 +129,35 @@ export default function Navbar() {
           <div className="flex flex-col gap-4">
             <a 
               href="#services" 
-              className="font-medium py-2 hover:text-[hsl(var(--neon-blue))] transition-colors"
+              className="font-medium py-2 hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors"
               onClick={(e) => { e.preventDefault(); handleNavClick('services'); }}
             >
               Services
             </a>
             <a 
               href="#gallery" 
-              className="font-medium py-2 hover:text-[hsl(var(--neon-blue))] transition-colors"
+              className="font-medium py-2 hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors"
               onClick={(e) => { e.preventDefault(); handleNavClick('gallery'); }}
             >
               Gallery
             </a>
             <a 
               href="#features" 
-              className="font-medium py-2 hover:text-[hsl(var(--neon-blue))] transition-colors"
+              className="font-medium py-2 hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors"
               onClick={(e) => { e.preventDefault(); handleNavClick('features'); }}
             >
               Features
             </a>
             <a 
               href="#testimonials" 
-              className="font-medium py-2 hover:text-[hsl(var(--neon-blue))] transition-colors"
+              className="font-medium py-2 hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors"
               onClick={(e) => { e.preventDefault(); handleNavClick('testimonials'); }}
             >
               Testimonials
             </a>
             <a 
               href="#contact" 
-              className="font-medium py-2 hover:text-[hsl(var(--neon-blue))] transition-colors"
+              className="font-medium py-2 hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors"
               onClick={(e) => { e.preventDefault(); handleNavClick('contact'); }}
             >
               Contact
