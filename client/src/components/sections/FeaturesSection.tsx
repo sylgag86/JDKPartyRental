@@ -35,7 +35,7 @@ export default function FeaturesSection() {
           <div className="order-1 lg:order-2 relative">
             <div className="relative mx-auto max-w-md">
               <img 
-                src="https://images.unsplash.com/photo-1565035010268-a3816f98589a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
                 alt="360 Photo Booth Platform" 
                 className="rounded-xl shadow-2xl relative z-10" 
               />
