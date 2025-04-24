@@ -14,26 +14,46 @@ export default function BookingSection() {
   const [calendlyError, setCalendlyError] = useState(false);
   
   useEffect(() => {
-    // Load Calendly script
+    // Function to initialize Calendly
+    const initCalendly = () => {
+      if (window.Calendly) {
+        setIsCalendlyLoaded(true);
+        setCalendlyError(false);
+        
+        // Initialize Calendly inline widget
+        try {
+          window.Calendly.initInlineWidget({
+            url: 'https://calendly.com/jdkpartyrentalsllc/360-photo-booth-booking?hide_gdpr_banner=1',
+            parentElement: document.getElementById('calendly-inline-widget'),
+            prefill: {},
+            utm: {}
+          });
+        } catch (error) {
+          console.error('Error initializing Calendly widget:', error);
+          setCalendlyError(true);
+        }
+      }
+    };
+    
+    // Check if Calendly is already loaded
+    if (window.Calendly) {
+      initCalendly();
+      return;
+    }
+    
+    // Load Calendly script if not already loaded
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
     script.async = true;
+    script.onload = initCalendly;
+    script.onerror = () => setCalendlyError(true);
     
-    script.onload = () => {
-      setIsCalendlyLoaded(true);
-      setCalendlyError(false);
-    };
-    
-    script.onerror = () => {
-      setCalendlyError(true);
-    };
-    
-    document.body.appendChild(script);
+    document.head.appendChild(script);
 
     // Cleanup function
     return () => {
       try {
-        document.body.removeChild(script);
+        document.head.removeChild(script);
       } catch (e) {
         // Script might have been removed already
       }
@@ -64,7 +84,7 @@ export default function BookingSection() {
                 <div className="bg-[hsl(var(--dark-bg))] p-4 rounded-lg text-left w-full max-w-md overflow-auto mb-6">
                   <code className="text-sm text-gray-300">
                     <pre className="whitespace-pre-wrap">
-                      {`data-url="https://calendly.com/YOUR_USERNAME/service"`}
+                      {`url: 'https://calendly.com/YOUR_USERNAME/service'`}
                     </pre>
                   </code>
                 </div>
@@ -82,8 +102,8 @@ export default function BookingSection() {
               </div>
             ) : (
               <div 
-                className="calendly-inline-widget w-full h-full" 
-                data-url="https://calendly.com/your-calendly-username/360-photo-booth-booking?hide_gdpr_banner=1"
+                id="calendly-inline-widget"
+                className="w-full h-full" 
                 style={{ minWidth: '320px' }}
               ></div>
             )}
