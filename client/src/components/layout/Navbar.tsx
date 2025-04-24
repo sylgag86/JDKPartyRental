@@ -39,7 +39,7 @@ export default function Navbar() {
           {/* Logo */}
           <a href="#" className="flex items-center gap-2" onClick={() => handleNavClick('hero')}>
             <span className="text-3xl font-bold font-outfit text-[hsl(var(--neon-pink))] text-glow-pink animate-glow-pink">JDK</span>
-            <span className="hidden md:inline-block text-xl font-semibold text-white">360° Photo Booth</span>
+            <span className="hidden md:inline-block text-xl font-semibold text-white">Party Rentals</span>
           </a>
           
           {/* Desktop Menu */}

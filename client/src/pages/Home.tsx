@@ -8,6 +8,7 @@ import GallerySection from "@/components/sections/GallerySection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import ContactSection from "@/components/sections/ContactSection";
 import FAQSection from "@/components/sections/FAQSection";
+import BookingSection from "@/components/sections/BookingSection";
 import Particles from "@/components/Particles";
 
 export default function Home() {
@@ -47,6 +48,7 @@ export default function Home() {
         <FeaturesSection />
         <GallerySection />
         <TestimonialsSection />
+        <BookingSection />
         <ContactSection />
         <FAQSection />
       </main>
