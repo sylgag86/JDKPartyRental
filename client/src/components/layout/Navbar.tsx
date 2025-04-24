@@ -14,7 +14,11 @@ export default function Navbar() {
 
   // Close mobile menu when clicking a link
   const handleNavClick = (id: string) => {
-    smoothScrollTo(id);
+    if (id === 'about') {
+      window.location.href = '/about';
+    } else {
+      smoothScrollTo(id);
+    }
     setMobileMenuOpen(false);
   };
 
@@ -96,6 +100,13 @@ export default function Navbar() {
             >
               Contact
             </a>
+            <a 
+              href="/about" 
+              className="font-medium hover:text-[hsl(var(--neon-gold))] hover:text-glow-gold transition-colors"
+              onClick={(e) => { e.preventDefault(); handleNavClick('about'); }}
+            >
+              About Us
+            </a>
           </div>
           
           {/* CTA Button */}
@@ -164,6 +175,13 @@ export default function Navbar() {
               onClick={(e) => { e.preventDefault(); handleNavClick('contact'); }}
             >
               Contact
+            </a>
+            <a 
+              href="/about" 
+              className="font-medium py-2 hover:text-[hsl(var(--neon-gold))] hover:text-glow-gold transition-colors"
+              onClick={(e) => { e.preventDefault(); handleNavClick('about'); }}
+            >
+              About Us
             </a>
           </div>
         </Container>
