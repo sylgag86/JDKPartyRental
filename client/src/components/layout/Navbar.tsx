@@ -102,14 +102,14 @@ export default function Navbar() {
             </a>
             <a 
               href="#testimonials" 
-              className={`font-medium hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'testimonials' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold' : ''}`}
+              className={`font-medium hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'testimonials' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold nav-active' : ''}`}
               onClick={(e) => { e.preventDefault(); handleNavClick('testimonials'); }}
             >
               Testimonials
             </a>
             <a 
               href="#contact" 
-              className={`font-medium hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'contact' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold' : ''}`}
+              className={`font-medium hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'contact' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold nav-active' : ''}`}
               onClick={(e) => { e.preventDefault(); handleNavClick('contact'); }}
             >
               Contact
@@ -150,35 +150,35 @@ export default function Navbar() {
           <div className="flex flex-col gap-4">
             <a 
               href="#services" 
-              className={`font-medium py-2 hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'services' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold' : ''}`}
+              className={`font-medium py-2 hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'services' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold nav-active' : ''}`}
               onClick={(e) => { e.preventDefault(); handleNavClick('services'); }}
             >
               Services
             </a>
             <a 
               href="#gallery" 
-              className={`font-medium py-2 hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'gallery' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold' : ''}`}
+              className={`font-medium py-2 hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'gallery' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold nav-active' : ''}`}
               onClick={(e) => { e.preventDefault(); handleNavClick('gallery'); }}
             >
               Gallery
             </a>
             <a 
               href="#features" 
-              className={`font-medium py-2 hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'features' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold' : ''}`}
+              className={`font-medium py-2 hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'features' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold nav-active' : ''}`}
               onClick={(e) => { e.preventDefault(); handleNavClick('features'); }}
             >
               Features
             </a>
             <a 
               href="#testimonials" 
-              className={`font-medium py-2 hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'testimonials' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold' : ''}`}
+              className={`font-medium py-2 hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'testimonials' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold nav-active' : ''}`}
               onClick={(e) => { e.preventDefault(); handleNavClick('testimonials'); }}
             >
               Testimonials
             </a>
             <a 
               href="#contact" 
-              className={`font-medium py-2 hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'contact' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold' : ''}`}
+              className={`font-medium py-2 hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'contact' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold nav-active' : ''}`}
               onClick={(e) => { e.preventDefault(); handleNavClick('contact'); }}
             >
               Contact
