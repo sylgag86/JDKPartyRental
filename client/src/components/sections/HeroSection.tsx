@@ -74,7 +74,7 @@ export default function HeroSection() {
             <div className="relative">
               <div className="rounded-xl shadow-2xl relative z-10 overflow-hidden w-full aspect-[9/16] md:aspect-video">
                 <iframe 
-                  src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F100089247457004%2Fvideos%2F651341327868884%2F&show_text=false" 
+                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fjdkpartyrentalsllc%2Fvideos%2F651341327868884%2F&width=500&show_text=false&height=280&appId" 
                   className="w-full h-full border-0"
                   scrolling="no"
                   frameBorder="0"
