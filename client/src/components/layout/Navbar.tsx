@@ -11,28 +11,44 @@ export default function Navbar() {
   // Array of section IDs in order of appearance
   const sections = ['hero', 'services', 'features', 'gallery', 'testimonials', 'book-now', 'contact', 'faq'];
   
-  // Function to get different gradient based on active section
+  // Function to get dynamic gradient based on active section
   const getActiveGradient = () => {
-    switch(activeSection) {
-      case 'hero':
-        return 'linear-gradient(90deg, hsla(var(--neon-blue)/0.1), hsla(var(--neon-pink)/0.1))';
-      case 'services':
-        return 'linear-gradient(90deg, hsla(var(--neon-blue)/0.15), hsla(var(--neon-blue)/0.05))';
-      case 'features':
-        return 'linear-gradient(90deg, hsla(var(--neon-purple)/0.15), hsla(var(--neon-blue)/0.05))';
-      case 'gallery':
-        return 'linear-gradient(90deg, hsla(var(--neon-pink)/0.15), hsla(var(--neon-purple)/0.05))';
-      case 'testimonials':
-        return 'linear-gradient(90deg, hsla(var(--neon-gold)/0.1), hsla(var(--neon-pink)/0.05))';
-      case 'book-now':
-        return 'linear-gradient(90deg, hsla(var(--neon-blue)/0.15), hsla(var(--neon-gold)/0.05))';
-      case 'contact':
-        return 'linear-gradient(90deg, hsla(var(--neon-blue)/0.1), hsla(var(--neon-gold)/0.1))';
-      case 'faq':
-        return 'linear-gradient(90deg, hsla(var(--neon-purple)/0.1), hsla(var(--neon-gold)/0.05))';
-      default:
-        return 'linear-gradient(90deg, hsla(var(--neon-blue)/0.1), hsla(var(--neon-pink)/0.1))';
-    }
+    // Create more dynamic gradient effects based on section
+    const gradients = {
+      'hero': `linear-gradient(to right, 
+                hsla(var(--neon-blue)/0.2), 
+                hsla(var(--neon-pink)/0.2))`,
+      'services': `linear-gradient(to right, 
+                    hsla(var(--neon-blue)/0.25), 
+                    hsla(var(--neon-blue)/0.05), 
+                    hsla(var(--neon-blue)/0.15))`,
+      'features': `linear-gradient(to right, 
+                    hsla(var(--neon-purple)/0.2), 
+                    hsla(var(--neon-blue)/0.1), 
+                    hsla(var(--neon-purple)/0.05))`,
+      'gallery': `linear-gradient(to right, 
+                    hsla(var(--neon-pink)/0.2), 
+                    hsla(var(--neon-purple)/0.1), 
+                    hsla(var(--neon-pink)/0.05))`,
+      'testimonials': `linear-gradient(to right, 
+                        hsla(var(--neon-gold)/0.15), 
+                        hsla(var(--neon-pink)/0.05), 
+                        hsla(var(--neon-gold)/0.1))`,
+      'book-now': `linear-gradient(to right, 
+                    hsla(var(--neon-blue)/0.15), 
+                    hsla(var(--neon-gold)/0.15), 
+                    hsla(var(--neon-blue)/0.1))`,
+      'contact': `linear-gradient(to right, 
+                    hsla(var(--neon-blue)/0.1), 
+                    hsla(var(--neon-gold)/0.1), 
+                    hsla(var(--neon-blue)/0.15))`,
+      'faq': `linear-gradient(to right, 
+                hsla(var(--neon-purple)/0.15), 
+                hsla(var(--neon-gold)/0.1), 
+                hsla(var(--neon-purple)/0.05))`,
+    };
+    
+    return gradients[activeSection as keyof typeof gradients] || gradients.hero;
   };
 
   // Toggle mobile menu
@@ -83,12 +99,20 @@ export default function Navbar() {
 
   return (
     <nav 
-      className={`sticky top-0 left-0 w-full z-50 content-above-particles transition-all duration-300 ${
-        scrolled ? 'bg-opacity-90 backdrop-filter backdrop-blur-lg shadow-neon-blue' : 'bg-opacity-40'
+      className={`sticky top-0 left-0 w-full z-50 content-above-particles transition-all duration-500 ${
+        scrolled ? 'bg-opacity-90 backdrop-filter backdrop-blur-lg' : 'bg-opacity-40'
       }`}
       style={{
         backgroundColor: 'hsla(var(--dark-bg) / 0.7)',
-        transition: 'background-color 0.3s, box-shadow 0.3s'
+        boxShadow: activeSection ? `0 0 10px 0 hsla(var(--${
+          activeSection === 'services' ? 'neon-blue' : 
+          activeSection === 'gallery' ? 'neon-pink' :
+          activeSection === 'features' ? 'neon-purple' :
+          activeSection === 'testimonials' ? 'neon-gold' :
+          activeSection === 'contact' ? 'neon-blue' :
+          activeSection === 'book-now' ? 'neon-gold' : 'neon-blue'
+        }) / 0.5)` : 'none',
+        transition: 'all 0.5s ease'
       }}
     >
       <div 
@@ -111,56 +135,66 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-8">
             <a 
               href="#services" 
-              className={`font-medium hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'services' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold nav-active' : ''}`}
+              className={`font-medium relative group transition-all duration-300 ${activeSection === 'services' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold nav-active' : ''}`}
               onClick={(e) => { e.preventDefault(); handleNavClick('services'); }}
             >
-              Services
+              <span className="transition-colors duration-300 group-hover:text-[hsl(var(--neon-blue))] group-hover:text-glow-blue">Services</span>
+              <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-[hsl(var(--neon-blue))] transition-all duration-300 ${activeSection === 'services' ? 'w-full' : 'group-hover:w-full'}`}></span>
             </a>
             <a 
               href="#gallery" 
-              className={`font-medium hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'gallery' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold nav-active' : ''}`}
+              className={`font-medium relative group transition-all duration-300 ${activeSection === 'gallery' ? 'text-[hsl(var(--neon-pink))] text-glow-pink font-bold nav-active' : ''}`}
               onClick={(e) => { e.preventDefault(); handleNavClick('gallery'); }}
             >
-              Gallery
+              <span className="transition-colors duration-300 group-hover:text-[hsl(var(--neon-pink))] group-hover:text-glow-pink">Gallery</span>
+              <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-[hsl(var(--neon-pink))] transition-all duration-300 ${activeSection === 'gallery' ? 'w-full' : 'group-hover:w-full'}`}></span>
             </a>
             <a 
               href="#features" 
-              className={`font-medium hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'features' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold nav-active' : ''}`}
+              className={`font-medium relative group transition-all duration-300 ${activeSection === 'features' ? 'text-[hsl(var(--neon-purple))] text-glow-purple font-bold nav-active' : ''}`}
               onClick={(e) => { e.preventDefault(); handleNavClick('features'); }}
             >
-              Features
+              <span className="transition-colors duration-300 group-hover:text-[hsl(var(--neon-purple))] group-hover:text-glow-purple">Features</span>
+              <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-[hsl(var(--neon-purple))] transition-all duration-300 ${activeSection === 'features' ? 'w-full' : 'group-hover:w-full'}`}></span>
             </a>
             <a 
               href="#testimonials" 
-              className={`font-medium hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'testimonials' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold nav-active' : ''}`}
+              className={`font-medium relative group transition-all duration-300 ${activeSection === 'testimonials' ? 'text-[hsl(var(--neon-gold))] text-glow-gold font-bold nav-active' : ''}`}
               onClick={(e) => { e.preventDefault(); handleNavClick('testimonials'); }}
             >
-              Testimonials
+              <span className="transition-colors duration-300 group-hover:text-[hsl(var(--neon-gold))] group-hover:text-glow-gold">Testimonials</span>
+              <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-[hsl(var(--neon-gold))] transition-all duration-300 ${activeSection === 'testimonials' ? 'w-full' : 'group-hover:w-full'}`}></span>
             </a>
             <a 
               href="#contact" 
-              className={`font-medium hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'contact' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold nav-active' : ''}`}
+              className={`font-medium relative group transition-all duration-300 ${activeSection === 'contact' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold nav-active' : ''}`}
               onClick={(e) => { e.preventDefault(); handleNavClick('contact'); }}
             >
-              Contact
+              <span className="transition-colors duration-300 group-hover:text-[hsl(var(--neon-blue))] group-hover:text-glow-blue">Contact</span>
+              <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-[hsl(var(--neon-blue))] transition-all duration-300 ${activeSection === 'contact' ? 'w-full' : 'group-hover:w-full'}`}></span>
             </a>
             <a 
               href="/about" 
-              className="font-medium hover:text-[hsl(var(--neon-gold))] hover:text-glow-gold transition-colors"
+              className="font-medium relative group transition-all duration-300"
               onClick={(e) => { e.preventDefault(); handleNavClick('about'); }}
             >
-              About Us
+              <span className="transition-colors duration-300 group-hover:text-[hsl(var(--neon-gold))] group-hover:text-glow-gold">About Us</span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[hsl(var(--neon-gold))] transition-all duration-300 group-hover:w-full"></span>
             </a>
           </div>
           
           {/* CTA Button */}
           <NeonButton 
-            color="blue" 
+            color={activeSection === 'book-now' ? 'gold' : 'blue'} 
             size="sm"
             onClick={() => handleNavClick('book-now')}
-            className={`animate-pulse-slow ${activeSection === 'book-now' ? 'shadow-neon-blue' : ''}`}
+            className={`transition-all duration-500 ${
+              activeSection === 'book-now' 
+                ? 'animate-bounce-gentle shadow-lg shadow-[hsla(var(--neon-gold)/0.5)] scale-105' 
+                : 'animate-pulse-slow hover:scale-105'
+            }`}
           >
-            Book Now
+            {activeSection === 'book-now' ? 'Booking Now!' : 'Book Now'}
           </NeonButton>
           
           {/* Mobile Menu Button */}
@@ -175,50 +209,71 @@ export default function Navbar() {
       </Container>
       
       {/* Mobile Menu */}
-      <div className={`bg-[hsl(var(--dark-bg2))] md:hidden transition-all duration-300 overflow-hidden ${mobileMenuOpen ? 'max-h-96' : 'max-h-0'}`}>
+      <div className={`bg-gradient-to-br from-[hsla(var(--dark-bg2)/0.9)] to-[hsla(var(--dark-bg)/0.95)] backdrop-blur-sm md:hidden transition-all duration-500 overflow-hidden ${mobileMenuOpen ? 'max-h-[500px]' : 'max-h-0'}`}>
         <Container className="py-4">
           <div className="flex flex-col gap-4">
             <a 
               href="#services" 
-              className={`font-medium py-2 hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'services' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold nav-active' : ''}`}
+              className={`font-medium py-2 relative overflow-hidden transition-all duration-300`}
               onClick={(e) => { e.preventDefault(); handleNavClick('services'); }}
             >
-              Services
+              <div className={`flex items-center ${activeSection === 'services' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold' : ''}`}>
+                <span className="transition-all duration-300">Services</span>
+                {activeSection === 'services' && <span className="ml-2 text-xs animate-pulse">●</span>}
+              </div>
+              <span className={`absolute bottom-0 left-0 h-0.5 transition-all duration-700 ${activeSection === 'services' ? 'w-full bg-[hsl(var(--neon-blue))]' : 'w-0 bg-transparent'}`}></span>
             </a>
             <a 
               href="#gallery" 
-              className={`font-medium py-2 hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'gallery' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold nav-active' : ''}`}
+              className={`font-medium py-2 relative overflow-hidden transition-all duration-300`}
               onClick={(e) => { e.preventDefault(); handleNavClick('gallery'); }}
             >
-              Gallery
+              <div className={`flex items-center ${activeSection === 'gallery' ? 'text-[hsl(var(--neon-pink))] text-glow-pink font-bold' : ''}`}>
+                <span className="transition-all duration-300">Gallery</span>
+                {activeSection === 'gallery' && <span className="ml-2 text-xs animate-pulse">●</span>}
+              </div>
+              <span className={`absolute bottom-0 left-0 h-0.5 transition-all duration-700 ${activeSection === 'gallery' ? 'w-full bg-[hsl(var(--neon-pink))]' : 'w-0 bg-transparent'}`}></span>
             </a>
             <a 
               href="#features" 
-              className={`font-medium py-2 hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'features' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold nav-active' : ''}`}
+              className={`font-medium py-2 relative overflow-hidden transition-all duration-300`}
               onClick={(e) => { e.preventDefault(); handleNavClick('features'); }}
             >
-              Features
+              <div className={`flex items-center ${activeSection === 'features' ? 'text-[hsl(var(--neon-purple))] text-glow-purple font-bold' : ''}`}>
+                <span className="transition-all duration-300">Features</span>
+                {activeSection === 'features' && <span className="ml-2 text-xs animate-pulse">●</span>}
+              </div>
+              <span className={`absolute bottom-0 left-0 h-0.5 transition-all duration-700 ${activeSection === 'features' ? 'w-full bg-[hsl(var(--neon-purple))]' : 'w-0 bg-transparent'}`}></span>
             </a>
             <a 
               href="#testimonials" 
-              className={`font-medium py-2 hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'testimonials' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold nav-active' : ''}`}
+              className={`font-medium py-2 relative overflow-hidden transition-all duration-300`}
               onClick={(e) => { e.preventDefault(); handleNavClick('testimonials'); }}
             >
-              Testimonials
+              <div className={`flex items-center ${activeSection === 'testimonials' ? 'text-[hsl(var(--neon-gold))] text-glow-gold font-bold' : ''}`}>
+                <span className="transition-all duration-300">Testimonials</span>
+                {activeSection === 'testimonials' && <span className="ml-2 text-xs animate-pulse">●</span>}
+              </div>
+              <span className={`absolute bottom-0 left-0 h-0.5 transition-all duration-700 ${activeSection === 'testimonials' ? 'w-full bg-[hsl(var(--neon-gold))]' : 'w-0 bg-transparent'}`}></span>
             </a>
             <a 
               href="#contact" 
-              className={`font-medium py-2 hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors ${activeSection === 'contact' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold nav-active' : ''}`}
+              className={`font-medium py-2 relative overflow-hidden transition-all duration-300`}
               onClick={(e) => { e.preventDefault(); handleNavClick('contact'); }}
             >
-              Contact
+              <div className={`flex items-center ${activeSection === 'contact' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold' : ''}`}>
+                <span className="transition-all duration-300">Contact</span>
+                {activeSection === 'contact' && <span className="ml-2 text-xs animate-pulse">●</span>}
+              </div>
+              <span className={`absolute bottom-0 left-0 h-0.5 transition-all duration-700 ${activeSection === 'contact' ? 'w-full bg-[hsl(var(--neon-blue))]' : 'w-0 bg-transparent'}`}></span>
             </a>
             <a 
               href="/about" 
-              className="font-medium py-2 hover:text-[hsl(var(--neon-gold))] hover:text-glow-gold transition-colors"
+              className="font-medium py-2 text-white hover:text-[hsl(var(--neon-gold))] hover:text-glow-gold transition-colors relative overflow-hidden"
               onClick={(e) => { e.preventDefault(); handleNavClick('about'); }}
             >
-              About Us
+              <span>About Us</span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[hsl(var(--neon-gold))] transition-all duration-300 hover:w-full"></span>
             </a>
           </div>
         </Container>
