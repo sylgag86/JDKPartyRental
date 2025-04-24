@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from '@/lib/utils';
+import { cn, smoothScrollTo } from '@/lib/utils';
 
 interface NeonButtonProps {
   children: React.ReactNode;
@@ -11,6 +11,7 @@ interface NeonButtonProps {
   href?: string;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
+  goToCalendar?: boolean;
 }
 
 export function NeonButton({
@@ -22,7 +23,8 @@ export function NeonButton({
   onClick,
   href,
   type = 'button',
-  disabled
+  disabled,
+  goToCalendar = false
 }: NeonButtonProps) {
   // Define color classes
   const colorClasses = {
@@ -63,13 +65,37 @@ export function NeonButton({
     className
   );
 
+  // Handle button click
+  const handleButtonClick = () => {
+    if (goToCalendar) {
+      // Navigate to the booking section (calendar)
+      smoothScrollTo('book-now');
+    }
+    
+    // Call the original onClick handler if provided
+    if (onClick) {
+      onClick();
+    }
+  };
+
   // Render as link if href is provided
   if (href) {
+    const linkClickHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
+      if (goToCalendar) {
+        e.preventDefault();
+        smoothScrollTo('book-now');
+      }
+      
+      if (onClick) {
+        onClick();
+      }
+    };
+    
     return (
       <a 
         href={href}
         className={buttonClasses}
-        onClick={onClick}
+        onClick={linkClickHandler}
       >
         {children}
       </a>
@@ -81,7 +107,7 @@ export function NeonButton({
     <button
       type={type}
       className={buttonClasses}
-      onClick={onClick}
+      onClick={handleButtonClick}
       disabled={disabled}
     >
       {children}
