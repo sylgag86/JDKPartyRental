@@ -137,17 +137,16 @@ export default function Navbar() {
   
   return (
     <nav 
-      className="fixed top-0 left-0 w-full z-50 content-above-particles transition-all duration-300"
+      className="fixed top-0 left-0 w-full z-[1000] bg-[hsla(var(--dark-bg)/0.9)] shadow-lg backdrop-blur transition-all duration-300"
       style={{
-        backgroundColor: 'hsla(var(--dark-bg) / 0.9)',
-        boxShadow: activeSection ? `0 0 10px 0 hsla(var(--${
+        boxShadow: `0 2px 15px 0 hsla(var(--${
           activeSection === 'services' ? 'neon-blue' : 
           activeSection === 'gallery' ? 'neon-pink' :
           activeSection === 'features' ? 'neon-purple' :
           activeSection === 'testimonials' ? 'neon-gold' :
           activeSection === 'contact' ? 'neon-blue' :
           activeSection === 'book-now' ? 'neon-gold' : 'neon-blue'
-        }) / 0.5)` : 'none'
+        }) / 0.5)`
       }}
     >
       <div 

@@ -42,7 +42,7 @@ export default function Home() {
     <div className="min-h-screen bg-[hsl(var(--dark-bg))]">
       <Particles />
       <Navbar />
-      <main className="pt-[100px]"> {/* This padding creates space for the fixed navbar */}
+      <main className="pt-[85px]"> {/* This padding creates space for the fixed navbar */}
         <HeroSection />
         <ServicesSection />
         <FeaturesSection />

@@ -213,7 +213,7 @@ export default function ServiceDetail() {
       
       <Navbar />
       
-      <main>
+      <main className="pt-[85px]"> {/* Extra padding for fixed navbar */}
         {/* Hero Section */}
         <section className="pt-32 pb-20 relative bg-gradient-to-b from-[hsl(var(--dark-bg))] to-[hsl(var(--dark-bg2))]">
           <Container>
