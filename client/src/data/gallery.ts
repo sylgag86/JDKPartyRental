@@ -1,42 +1,42 @@
 export const gallery = [
   {
-    image: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    title: "Birthday Bash",
-    description: "A night to remember with friends and family"
+    image: "/assets/gallery/IMG_0573.jpeg",
+    title: "360° Photo Experience",
+    description: "Capturing unforgettable moments with our cutting-edge technology"
   },
   {
-    image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    title: "Wedding Reception",
-    description: "Celebrating love with elegant memories"
+    image: "/assets/gallery/IMG_0574.jpeg",
+    title: "Wedding Celebrations",
+    description: "Making your special day even more memorable"
   },
   {
-    image: "https://images.unsplash.com/photo-1496337589254-7e19d01cec44?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    title: "Corporate Event",
-    description: "Building team spirit and connections"
+    image: "/assets/gallery/IMG_0575.jpeg",
+    title: "Party Setup",
+    description: "Professional equipment ready for your event"
   },
   {
-    image: "https://images.unsplash.com/photo-1470753937643-efeb931202a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    title: "Baby Shower",
-    description: "Celebrating new beginnings with joy"
+    image: "/assets/gallery/banner-green.png",
+    title: "Green Neon Theme",
+    description: "Glowing green aesthetics for vibrant events"
   },
   {
-    image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    title: "Graduation Party",
-    description: "Celebrating achievements in style"
+    image: "/assets/gallery/banner-blue.png",
+    title: "Blue Neon Theme",
+    description: "Electric blue vibes for an unforgettable experience"
   },
   {
-    image: "https://images.unsplash.com/photo-1540317580384-e5d43867caa6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    title: "Prom Night",
-    description: "Creating magical high school memories"
+    image: "/assets/gallery/IMG_0573.jpeg",
+    title: "Birthday Parties",
+    description: "Celebrate another year with stunning 360° photos"
   },
   {
-    image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    title: "Holiday Party",
-    description: "Festive celebrations with friends"
+    image: "/assets/gallery/IMG_0574.jpeg",
+    title: "Corporate Events",
+    description: "Elevate your company gatherings with interactive entertainment"
   },
   {
-    image: "https://images.unsplash.com/photo-1517263904808-5dc91e3e7044?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    title: "Anniversary",
-    description: "Celebrating years of love and happiness"
+    image: "/assets/gallery/IMG_0575.jpeg",
+    title: "Baby Showers",
+    description: "Create magical memories for the mom-to-be"
   }
 ];
