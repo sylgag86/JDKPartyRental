@@ -10,6 +10,7 @@ interface NeonButtonProps {
   onClick?: () => void;
   href?: string;
   type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
 }
 
 export function NeonButton({
@@ -20,7 +21,8 @@ export function NeonButton({
   className,
   onClick,
   href,
-  type = 'button'
+  type = 'button',
+  disabled
 }: NeonButtonProps) {
   // Define color classes
   const colorClasses = {
@@ -51,11 +53,13 @@ export function NeonButton({
 
   // Common classes
   const buttonClasses = cn(
-    'rounded-full font-semibold transition-all hover:scale-105 relative overflow-hidden',
+    'rounded-full font-semibold transition-all relative overflow-hidden',
+    !disabled && 'hover:scale-105',
     sizeClasses[size],
     colorClasses[color][variant],
     'before:absolute before:inset-0 before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100',
     'before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:blur-sm',
+    disabled && 'opacity-50 cursor-not-allowed hover:scale-100 pointer-events-none',
     className
   );
 
