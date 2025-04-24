@@ -7,6 +7,11 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [scrollY, setScrollY] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('up');
+  const [scrollSpeed, setScrollSpeed] = useState(0);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [lastScrollTime, setLastScrollTime] = useState(Date.now());
   
   // Array of section IDs in order of appearance
   const sections = ['hero', 'services', 'features', 'gallery', 'testimonials', 'book-now', 'contact', 'faq'];
@@ -69,15 +74,30 @@ export default function Navbar() {
   // Handle scroll effect and section highlighting
   useEffect(() => {
     const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const currentTime = Date.now();
+      
+      // Calculate scroll direction and speed
+      const timeDiff = currentTime - lastScrollTime;
+      if (timeDiff > 0) {
+        const pixelsPerMs = Math.abs(currentScrollY - lastScrollY) / timeDiff;
+        setScrollSpeed(pixelsPerMs * 100); // Scale for better use
+        setScrollDirection(currentScrollY > lastScrollY ? 'down' : 'up');
+      }
+      
+      // Update scroll position and time
+      setScrollY(currentScrollY);
+      setLastScrollY(currentScrollY);
+      setLastScrollTime(currentTime);
+      
       // Handle navbar background
-      if (window.scrollY > 20) {
+      if (currentScrollY > 20) {
         setScrolled(true);
       } else {
         setScrolled(false);
       }
       
       // Handle active section tracking
-      const pageYOffset = window.pageYOffset;
       const buffer = 100; // Buffer to account for navbar height
       
       // Find the current active section
@@ -85,7 +105,7 @@ export default function Navbar() {
         const section = document.getElementById(sections[i]);
         if (section) {
           const sectionTop = section.offsetTop - buffer;
-          if (pageYOffset >= sectionTop) {
+          if (currentScrollY >= sectionTop) {
             setActiveSection(sections[i]);
             break;
           }
@@ -95,31 +115,56 @@ export default function Navbar() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [sections]);
+  }, [sections, lastScrollY, lastScrollTime]);
 
+  // Get navbar height transformation based on scroll
+  const getNavbarHeight = () => {
+    // Default height
+    const defaultHeight = scrolled ? '72px' : '80px';
+    
+    // When scrolling down, compress navbar slightly
+    if (scrollDirection === 'down' && scrollSpeed > 1) {
+      return scrolled ? '68px' : '76px';
+    }
+    
+    // When scrolling up quickly, expand navbar slightly for emphasis
+    if (scrollDirection === 'up' && scrollSpeed > 4) {
+      return scrolled ? '74px' : '82px';
+    }
+    
+    return defaultHeight;
+  };
+  
   return (
     <nav 
-      className={`sticky top-0 left-0 w-full z-50 content-above-particles transition-all duration-500 ${
+      className={`sticky top-0 left-0 w-full z-50 content-above-particles transition-all ${
         scrolled ? 'bg-opacity-90 backdrop-filter backdrop-blur-lg' : 'bg-opacity-40'
       }`}
       style={{
         backgroundColor: 'hsla(var(--dark-bg) / 0.7)',
-        boxShadow: activeSection ? `0 0 10px 0 hsla(var(--${
+        boxShadow: activeSection ? `0 0 ${Math.min(10 + scrollSpeed, 20)}px 0 hsla(var(--${
           activeSection === 'services' ? 'neon-blue' : 
           activeSection === 'gallery' ? 'neon-pink' :
           activeSection === 'features' ? 'neon-purple' :
           activeSection === 'testimonials' ? 'neon-gold' :
           activeSection === 'contact' ? 'neon-blue' :
           activeSection === 'book-now' ? 'neon-gold' : 'neon-blue'
-        }) / 0.5)` : 'none',
-        transition: 'all 0.5s ease'
+        }) / ${scrollSpeed > 3 ? 0.7 : 0.5})` : 'none',
+        height: getNavbarHeight(),
+        transform: scrollDirection === 'down' && scrollSpeed > 5 
+          ? `translateY(-${Math.min(scrollSpeed/8, 3)}px)` 
+          : 'translateY(0)',
+        transition: scrollSpeed > 4 ? 'all 0.3s ease' : 'all 0.5s ease'
       }}
     >
       <div 
         className="absolute inset-0 transition-all duration-500"
         style={{
-          background: getActiveGradient(),
-          opacity: 0.7
+          backgroundImage: getActiveGradient(),
+          opacity: scrollSpeed > 2 ? Math.min(0.9, 0.7 + (scrollSpeed / 50)) : 0.7,
+          transform: `translateY(${scrollDirection === 'down' ? Math.min(scrollSpeed / 10, 5) : 0}px)`,
+          backgroundSize: `${100 + (scrollSpeed * 2)}% ${100 + (scrollSpeed * 2)}%`,
+          backgroundPosition: scrollDirection === 'down' ? '0% 0%' : '100% 0%'
         }}
       ></div>
       
