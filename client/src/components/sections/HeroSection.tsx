@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from '@/components/ui/container';
 import { NeonButton } from '@/components/ui/NeonButton';
 import { smoothScrollTo } from '@/lib/utils';
-import heroImage from '@assets/image_1745529592395.png';
+import heroImage from '@assets/image_1745537376694.png';
 
 export default function HeroSection() {
   const handleLearnMore = () => {
@@ -73,11 +73,11 @@ export default function HeroSection() {
           {/* Hero Video */}
           <div className="lg:w-1/2 relative animate-float">
             <div className="relative">
-              <div className="rounded-xl shadow-2xl relative z-10 overflow-hidden w-full aspect-[9/16] md:aspect-video">
+              <div className="rounded-xl shadow-2xl relative z-10 overflow-hidden w-full aspect-[9/19] md:aspect-[9/16]">
                 <img 
                   src={heroImage} 
                   alt="JDK Party Rentals 360° Photo Booth" 
-                  className="w-full h-full object-cover border-0"
+                  className="w-full h-full object-contain border-0 bg-black"
                 />
               </div>
               
