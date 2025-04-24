@@ -10,6 +10,30 @@ export default function Navbar() {
   
   // Array of section IDs in order of appearance
   const sections = ['hero', 'services', 'features', 'gallery', 'testimonials', 'book-now', 'contact', 'faq'];
+  
+  // Function to get different gradient based on active section
+  const getActiveGradient = () => {
+    switch(activeSection) {
+      case 'hero':
+        return 'linear-gradient(90deg, hsla(var(--neon-blue)/0.1), hsla(var(--neon-pink)/0.1))';
+      case 'services':
+        return 'linear-gradient(90deg, hsla(var(--neon-blue)/0.15), hsla(var(--neon-blue)/0.05))';
+      case 'features':
+        return 'linear-gradient(90deg, hsla(var(--neon-purple)/0.15), hsla(var(--neon-blue)/0.05))';
+      case 'gallery':
+        return 'linear-gradient(90deg, hsla(var(--neon-pink)/0.15), hsla(var(--neon-purple)/0.05))';
+      case 'testimonials':
+        return 'linear-gradient(90deg, hsla(var(--neon-gold)/0.1), hsla(var(--neon-pink)/0.05))';
+      case 'book-now':
+        return 'linear-gradient(90deg, hsla(var(--neon-blue)/0.15), hsla(var(--neon-gold)/0.05))';
+      case 'contact':
+        return 'linear-gradient(90deg, hsla(var(--neon-blue)/0.1), hsla(var(--neon-gold)/0.1))';
+      case 'faq':
+        return 'linear-gradient(90deg, hsla(var(--neon-purple)/0.1), hsla(var(--neon-gold)/0.05))';
+      default:
+        return 'linear-gradient(90deg, hsla(var(--neon-blue)/0.1), hsla(var(--neon-pink)/0.1))';
+    }
+  };
 
   // Toggle mobile menu
   const toggleMobileMenu = () => {
@@ -55,7 +79,7 @@ export default function Navbar() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [sections]);
 
   return (
     <nav 
@@ -67,7 +91,13 @@ export default function Navbar() {
         transition: 'background-color 0.3s, box-shadow 0.3s'
       }}
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-[hsla(var(--neon-blue)/0.1)] to-[hsla(var(--neon-pink)/0.1)] opacity-70"></div>
+      <div 
+        className="absolute inset-0 transition-all duration-500"
+        style={{
+          background: getActiveGradient(),
+          opacity: 0.7
+        }}
+      ></div>
       
       <Container className="py-3 md:py-4 relative">
         <div className="flex items-center justify-between">
@@ -128,7 +158,7 @@ export default function Navbar() {
             color="blue" 
             size="sm"
             onClick={() => handleNavClick('book-now')}
-            className="animate-pulse-slow"
+            className={`animate-pulse-slow ${activeSection === 'book-now' ? 'shadow-neon-blue' : ''}`}
           >
             Book Now
           </NeonButton>
@@ -145,7 +175,7 @@ export default function Navbar() {
       </Container>
       
       {/* Mobile Menu */}
-      <div className={`bg-[hsl(var(--dark-bg2))] md:hidden transition-all duration-300 overflow-hidden ${mobileMenuOpen ? 'max-h-64' : 'max-h-0'}`}>
+      <div className={`bg-[hsl(var(--dark-bg2))] md:hidden transition-all duration-300 overflow-hidden ${mobileMenuOpen ? 'max-h-96' : 'max-h-0'}`}>
         <Container className="py-4">
           <div className="flex flex-col gap-4">
             <a 
