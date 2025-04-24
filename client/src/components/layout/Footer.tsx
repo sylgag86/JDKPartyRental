@@ -196,7 +196,15 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-gray-800 pt-8 mt-8 text-center text-gray-400 text-sm">
-          <p>&copy; {new Date().getFullYear()} JDK Party Rentals LLC. All rights reserved.</p>
+          <p className="mb-2">&copy; {new Date().getFullYear()} JDK Party Rentals LLC. All rights reserved.</p>
+          <p>
+            <a 
+              href="/admin" 
+              className="text-gray-500 hover:text-[hsl(var(--neon-blue))] transition-colors text-xs"
+            >
+              Admin Dashboard
+            </a>
+          </p>
         </div>
       </Container>
     </footer>

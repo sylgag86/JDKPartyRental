@@ -32,7 +32,7 @@ export default function AdminPage() {
   } = useQuery({
     queryKey: ['/api/bookings'],
     queryFn: async () => {
-      const response = await apiRequest('/api/bookings');
+      const response = await apiRequest('/api/bookings', 'GET');
       return response.json();
     }
   });
@@ -46,7 +46,7 @@ export default function AdminPage() {
   } = useQuery({
     queryKey: ['/api/contact-submissions'],
     queryFn: async () => {
-      const response = await apiRequest('/api/contact-submissions');
+      const response = await apiRequest('/api/contact-submissions', 'GET');
       return response.json();
     }
   });
@@ -54,10 +54,7 @@ export default function AdminPage() {
   // Mutation for updating booking status
   const updateBookingMutation = useMutation({
     mutationFn: async ({ id, status }: { id: number, status: string }) => {
-      const response = await apiRequest(`/api/bookings/${id}/status`, {
-        method: 'PATCH',
-        body: JSON.stringify({ status })
-      });
+      const response = await apiRequest(`/api/bookings/${id}/status`, 'PATCH', { status });
       return response.json();
     },
     onSuccess: () => {
@@ -80,10 +77,7 @@ export default function AdminPage() {
   // Mutation for updating submission status
   const updateSubmissionMutation = useMutation({
     mutationFn: async ({ id, status }: { id: number, status: string }) => {
-      const response = await apiRequest(`/api/contact-submissions/${id}/status`, {
-        method: 'PATCH',
-        body: JSON.stringify({ status })
-      });
+      const response = await apiRequest(`/api/contact-submissions/${id}/status`, 'PATCH', { status });
       return response.json();
     },
     onSuccess: () => {

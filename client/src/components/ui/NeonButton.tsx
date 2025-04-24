@@ -82,6 +82,7 @@ export function NeonButton({
       type={type}
       className={buttonClasses}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>
