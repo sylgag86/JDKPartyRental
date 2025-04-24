@@ -25,7 +25,7 @@ export const gallery = [
     description: "Professional equipment ready for your event"
   },
   {
-    image: "https://images.unsplash.com/photo-1470753937643-efeb931202a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    image: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
     title: "Baby Showers",
     description: "Create magical memories for the mom-to-be"
   },
