@@ -75,7 +75,7 @@ export function ServiceCard({
         {description}
       </p>
       
-      <a href="#book-now" className={cn(
+      <a href={`/services/${title.toLowerCase().replace(/\s+/g, '-').replace(/°/g, '')}`} className={cn(
         "inline-block font-semibold hover:underline",
         colorClasses[color].icon
       )}>
