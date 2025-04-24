@@ -262,7 +262,7 @@ export default function BookingSection() {
                   <div className="grid md:grid-cols-2 gap-8">
                     <div>
                       <h3 className="text-xl font-semibold mb-4 text-white">Select a Date</h3>
-                      <div className="bg-[hsl(var(--dark-bg))] p-4 rounded-lg">
+                      <div className="bg-[hsl(var(--dark-bg))] p-4 rounded-lg flex justify-center md:justify-start">
                         <Calendar
                           mode="single"
                           selected={selectedDate}
