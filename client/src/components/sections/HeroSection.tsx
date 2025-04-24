@@ -2,6 +2,7 @@ import React from 'react';
 import { Container } from '@/components/ui/container';
 import { NeonButton } from '@/components/ui/NeonButton';
 import { smoothScrollTo } from '@/lib/utils';
+import heroImage from '@assets/image_1745529592395.png';
 
 export default function HeroSection() {
   const handleLearnMore = () => {
@@ -73,14 +74,11 @@ export default function HeroSection() {
           <div className="lg:w-1/2 relative animate-float">
             <div className="relative">
               <div className="rounded-xl shadow-2xl relative z-10 overflow-hidden w-full aspect-[9/16] md:aspect-video">
-                <iframe 
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fjdkpartyrentalsllc%2Fvideos%2F651341327868884%2F&width=500&show_text=false&height=280&appId" 
-                  className="w-full h-full border-0"
-                  scrolling="no"
-                  frameBorder="0"
-                  allowFullScreen={true}
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                ></iframe>
+                <img 
+                  src={heroImage} 
+                  alt="JDK Party Rentals 360° Photo Booth" 
+                  className="w-full h-full object-cover border-0"
+                />
               </div>
               
               {/* Glow Effect around video */}
