@@ -73,14 +73,21 @@ export default function HeroSection() {
           <div className="lg:w-1/2 relative animate-float">
             <div className="relative">
               <div className="rounded-xl shadow-2xl relative z-10 overflow-hidden w-full aspect-[9/16] md:aspect-video">
-                <iframe 
-                  src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F100089247457004%2Fvideos%2F651341327868884%2F&show_text=false" 
-                  className="w-full h-full border-0"
-                  scrolling="no"
-                  frameBorder="0"
-                  allowFullScreen={true}
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                ></iframe>
+                <video 
+                  autoPlay 
+                  muted 
+                  loop 
+                  playsInline
+                  className="w-full h-full object-cover"
+                >
+                  <source src="https://player.vimeo.com/external/438342366.sd.mp4?s=e8f8a08f5f5b43b27a9b7c027de1cd8d5b53aee5&profile_id=164&oauth2_token_id=57447761" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center pointer-events-none">
+                  <div className="bg-black bg-opacity-30 px-6 py-4 rounded-xl">
+                    <h3 className="text-2xl font-bold text-white text-center text-glow-blue">360° Photo Experience</h3>
+                  </div>
+                </div>
               </div>
               
               {/* Glow Effect around video */}
