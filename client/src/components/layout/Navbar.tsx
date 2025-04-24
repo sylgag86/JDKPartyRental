@@ -137,34 +137,24 @@ export default function Navbar() {
   
   return (
     <nav 
-      className={`sticky top-0 left-0 w-full z-50 content-above-particles transition-all ${
-        scrolled ? 'bg-opacity-90 backdrop-filter backdrop-blur-lg' : 'bg-opacity-40'
-      }`}
+      className="fixed top-0 left-0 w-full z-50 content-above-particles transition-all duration-300"
       style={{
-        backgroundColor: 'hsla(var(--dark-bg) / 0.7)',
-        boxShadow: activeSection ? `0 0 ${Math.min(10 + scrollSpeed, 20)}px 0 hsla(var(--${
+        backgroundColor: 'hsla(var(--dark-bg) / 0.9)',
+        boxShadow: activeSection ? `0 0 10px 0 hsla(var(--${
           activeSection === 'services' ? 'neon-blue' : 
           activeSection === 'gallery' ? 'neon-pink' :
           activeSection === 'features' ? 'neon-purple' :
           activeSection === 'testimonials' ? 'neon-gold' :
           activeSection === 'contact' ? 'neon-blue' :
           activeSection === 'book-now' ? 'neon-gold' : 'neon-blue'
-        }) / ${scrollSpeed > 3 ? 0.7 : 0.5})` : 'none',
-        height: getNavbarHeight(),
-        transform: scrollDirection === 'down' && scrollSpeed > 5 
-          ? `translateY(-${Math.min(scrollSpeed/8, 3)}px)` 
-          : 'translateY(0)',
-        transition: scrollSpeed > 4 ? 'all 0.3s ease' : 'all 0.5s ease'
+        }) / 0.5)` : 'none'
       }}
     >
       <div 
         className="absolute inset-0 transition-all duration-500"
         style={{
           backgroundImage: getActiveGradient(),
-          opacity: scrollSpeed > 2 ? Math.min(0.9, 0.7 + (scrollSpeed / 50)) : 0.7,
-          transform: `translateY(${scrollDirection === 'down' ? Math.min(scrollSpeed / 10, 5) : 0}px)`,
-          backgroundSize: `${100 + (scrollSpeed * 2)}% ${100 + (scrollSpeed * 2)}%`,
-          backgroundPosition: scrollDirection === 'down' ? '0% 0%' : '100% 0%'
+          opacity: 0.7
         }}
       ></div>
       
