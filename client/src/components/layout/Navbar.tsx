@@ -83,6 +83,13 @@ export default function Navbar() {
               Testimonials
             </a>
             <a 
+              href="#wizard" 
+              className="font-medium hover:text-[hsl(var(--neon-purple))] hover:text-glow-purple transition-colors"
+              onClick={(e) => { e.preventDefault(); handleNavClick('wizard'); }}
+            >
+              Wizard
+            </a>
+            <a 
               href="#contact" 
               className="font-medium hover:text-[hsl(var(--neon-blue))] hover:text-glow-blue transition-colors"
               onClick={(e) => { e.preventDefault(); handleNavClick('contact'); }}
@@ -143,6 +150,13 @@ export default function Navbar() {
               onClick={(e) => { e.preventDefault(); handleNavClick('testimonials'); }}
             >
               Testimonials
+            </a>
+            <a 
+              href="#wizard" 
+              className="font-medium py-2 hover:text-[hsl(var(--neon-purple))] hover:text-glow-purple transition-colors"
+              onClick={(e) => { e.preventDefault(); handleNavClick('wizard'); }}
+            >
+              Wizard
             </a>
             <a 
               href="#contact" 
