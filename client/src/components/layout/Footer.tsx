@@ -38,15 +38,7 @@ export default function Footer() {
               >
                 <i className="fab fa-facebook-f"></i>
               </a>
-              <a 
-                href="https://www.tiktok.com/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-[hsl(var(--dark-bg))] rounded-full flex items-center justify-center text-white hover:bg-[hsl(var(--neon-purple))] transition-colors"
-                aria-label="TikTok"
-              >
-                <i className="fab fa-tiktok"></i>
-              </a>
+
             </div>
           </div>
           
