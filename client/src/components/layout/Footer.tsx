@@ -73,15 +73,7 @@ export default function Footer() {
                   Features
                 </a>
               </li>
-              <li>
-                <a 
-                  href="#testimonials"
-                  className="text-gray-300 hover:text-[hsl(var(--neon-blue))] transition-colors"
-                  onClick={(e) => { e.preventDefault(); handleNavClick('testimonials'); }}
-                >
-                  Testimonials
-                </a>
-              </li>
+
               <li>
                 <a 
                   href="#book-now"
