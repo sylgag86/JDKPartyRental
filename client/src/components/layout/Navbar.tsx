@@ -14,7 +14,7 @@ export default function Navbar() {
   const [lastScrollTime, setLastScrollTime] = useState(Date.now());
   
   // Array of section IDs in order of appearance
-  const sections = ['hero', 'services', 'features', 'gallery', 'testimonials', 'book-now', 'contact', 'faq'];
+  const sections = ['hero', 'services', 'features', 'gallery', 'book-now', 'contact', 'faq'];
   
   // Function to get dynamic gradient based on active section
   const getActiveGradient = () => {
@@ -35,10 +35,7 @@ export default function Navbar() {
                     hsla(var(--neon-pink)/0.2), 
                     hsla(var(--neon-purple)/0.1), 
                     hsla(var(--neon-pink)/0.05))`,
-      'testimonials': `linear-gradient(to right, 
-                        hsla(var(--neon-gold)/0.15), 
-                        hsla(var(--neon-pink)/0.05), 
-                        hsla(var(--neon-gold)/0.1))`,
+
       'book-now': `linear-gradient(to right, 
                     hsla(var(--neon-blue)/0.15), 
                     hsla(var(--neon-gold)/0.15), 
@@ -143,7 +140,6 @@ export default function Navbar() {
           activeSection === 'services' ? 'neon-blue' : 
           activeSection === 'gallery' ? 'neon-pink' :
           activeSection === 'features' ? 'neon-purple' :
-          activeSection === 'testimonials' ? 'neon-gold' :
           activeSection === 'contact' ? 'neon-blue' :
           activeSection === 'book-now' ? 'neon-gold' : 'neon-blue'
         }) / 0.5)`
@@ -191,14 +187,7 @@ export default function Navbar() {
               <span className="transition-colors duration-300 group-hover:text-[hsl(var(--neon-purple))] group-hover:text-glow-purple">Features</span>
               <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-[hsl(var(--neon-purple))] transition-all duration-300 ${activeSection === 'features' ? 'w-full' : 'group-hover:w-full'}`}></span>
             </a>
-            <a 
-              href="#testimonials" 
-              className={`font-medium relative group transition-all duration-300 ${activeSection === 'testimonials' ? 'text-[hsl(var(--neon-gold))] text-glow-gold font-bold nav-active' : ''}`}
-              onClick={(e) => { e.preventDefault(); handleNavClick('testimonials'); }}
-            >
-              <span className="transition-colors duration-300 group-hover:text-[hsl(var(--neon-gold))] group-hover:text-glow-gold">Testimonials</span>
-              <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-[hsl(var(--neon-gold))] transition-all duration-300 ${activeSection === 'testimonials' ? 'w-full' : 'group-hover:w-full'}`}></span>
-            </a>
+
             <a 
               href="#contact" 
               className={`font-medium relative group transition-all duration-300 ${activeSection === 'contact' ? 'text-[hsl(var(--neon-blue))] text-glow-blue font-bold nav-active' : ''}`}
@@ -279,17 +268,7 @@ export default function Navbar() {
               </div>
               <span className={`absolute bottom-0 left-0 h-0.5 transition-all duration-700 ${activeSection === 'features' ? 'w-full bg-[hsl(var(--neon-purple))]' : 'w-0 bg-transparent'}`}></span>
             </a>
-            <a 
-              href="#testimonials" 
-              className={`font-medium py-2 relative overflow-hidden transition-all duration-300`}
-              onClick={(e) => { e.preventDefault(); handleNavClick('testimonials'); }}
-            >
-              <div className={`flex items-center ${activeSection === 'testimonials' ? 'text-[hsl(var(--neon-gold))] text-glow-gold font-bold' : ''}`}>
-                <span className="transition-all duration-300">Testimonials</span>
-                {activeSection === 'testimonials' && <span className="ml-2 text-xs animate-pulse">●</span>}
-              </div>
-              <span className={`absolute bottom-0 left-0 h-0.5 transition-all duration-700 ${activeSection === 'testimonials' ? 'w-full bg-[hsl(var(--neon-gold))]' : 'w-0 bg-transparent'}`}></span>
-            </a>
+
             <a 
               href="#contact" 
               className={`font-medium py-2 relative overflow-hidden transition-all duration-300`}
