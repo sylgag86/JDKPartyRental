@@ -1,42 +1,27 @@
 export const gallery = [
   {
     image: "/assets/gallery/IMG_0573.jpeg",
-    title: "360° Photo Experience",
-    description: "Capturing unforgettable moments with our cutting-edge technology"
-  },
-  {
-    image: "/assets/gallery/IMG_0573.jpeg",
-    title: "Birthday Parties",
-    description: "Celebrate another year with stunning 360° photos"
+    title: "360° Booth Setup",
+    description: "Premium platform, lighting, and backdrop setup ready before your guests arrive."
   },
   {
     image: "/assets/gallery/IMG_0574.jpeg",
-    title: "Wedding Celebrations",
-    description: "Making your special day even more memorable"
-  },
-  {
-    image: "/assets/gallery/IMG_0574.jpeg",
-    title: "Corporate Events",
-    description: "Elevate your company gatherings with interactive entertainment"
+    title: "Live Event Energy",
+    description: "Real moments from packed events with high-energy crowd interaction."
   },
   {
     image: "/assets/gallery/IMG_0575.jpeg",
-    title: "Party Setup",
-    description: "Professional equipment ready for your event"
-  },
-  {
-    image: "/assets/gallery/IMG_0575.jpeg",
-    title: "Baby Showers",
-    description: "Create magical memories for the mom-to-be"
-  },
-  {
-    image: "/assets/gallery/banner-green.png",
-    title: "Green Neon Theme",
-    description: "Glowing green aesthetics for vibrant events"
+    title: "Guest Moments",
+    description: "Candid captures that turn into shareable social-ready content."
   },
   {
     image: "/assets/gallery/banner-blue.png",
-    title: "Blue Neon Theme",
-    description: "Electric blue vibes for an unforgettable experience"
+    title: "Neon Night Theme",
+    description: "Modern neon styling for birthdays, weddings, and corporate nights."
+  },
+  {
+    image: "/assets/gallery/banner-green.png",
+    title: "Premium Event Branding",
+    description: "Custom themed visuals that make your event feel next-level."
   }
 ];
