@@ -208,7 +208,7 @@ export default function ServiceDetail() {
         <title>{service.title} - JDK Party Rentals | Central Florida Photo Booths</title>
         <meta name="description" content={`Explore JDK Party Rentals' ${service.title} service in Central Florida. ${service.description} Perfect for weddings, corporate events, and celebrations in Orlando, Tampa, and surrounding areas.`} />
         <meta name="keywords" content={`${service.title}, photo booth, 360 photo booth, Orlando, Tampa, Central Florida, party rentals, event rentals, ${service.title.toLowerCase()} rental`} />
-        <link rel="canonical" href={`https://jdkpartyrentals.com/services/${params?.serviceId}`} />
+        <link rel="canonical" href={`https://www.jdkpartyrentalsllc.com/services/${params?.serviceId}`} />
       </Helmet>
       
       <Navbar />
@@ -272,10 +272,7 @@ export default function ServiceDetail() {
                 <div className="relative">
                   <div className={`rounded-xl shadow-2xl relative z-10 overflow-hidden ${colorClasses[color].shadow}`}>
                     <img 
-                      src={service.imageUrl || `https://images.unsplash.com/photo-${service.title === '360° Photo Booth' ? '1533174072545-7a4b6ad7a6c3' : 
-                                            service.title === 'Mirror Photo Booth' ? '1516035069371-29a1b244cc32' : 
-                                            service.title === 'Open Air Booth' ? '1496843916299-590492c751f4' : 
-                                            '1525268323446-0505b6fe7778'}?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80`}
+                      src={service.imageUrl || "/assets/gallery/IMG_0574.jpeg"}
                       alt={service.title} 
                       className="w-full h-auto rounded-xl"
                     />

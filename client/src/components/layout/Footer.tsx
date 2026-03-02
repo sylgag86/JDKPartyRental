@@ -30,7 +30,7 @@ export default function Footer() {
                 <i className="fab fa-instagram"></i>
               </a>
               <a 
-                href="https://www.facebook.com/" 
+                href="https://www.facebook.com/JDKPartyRentalsllc" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-[hsl(var(--dark-bg))] rounded-full flex items-center justify-center text-white hover:bg-[hsl(var(--neon-blue))] transition-colors"

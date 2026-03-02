@@ -6,17 +6,19 @@ interface GalleryItemProps {
   title: string;
   description: string;
   onClick: () => void;
+  className?: string;
 }
 
 export function GalleryItem({
   image,
   title,
   description,
-  onClick
+  onClick,
+  className
 }: GalleryItemProps) {
   return (
     <div 
-      className="group relative overflow-hidden rounded-xl aspect-square cursor-pointer"
+      className={cn("group relative overflow-hidden rounded-xl cursor-pointer min-h-[220px]", className)}
       onClick={onClick}
     >
       <img 

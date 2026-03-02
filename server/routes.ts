@@ -2,6 +2,7 @@ import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactSchema, insertBookingSchema } from "@shared/schema";
+import { sendBookingNotification, sendContactNotification } from "./notifications";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -22,6 +23,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Save to database
       const submission = await storage.submitContactForm(formData.data);
       
+      // Send notification email (best-effort)
+      await sendContactNotification(formData.data).catch((err) => {
+        console.error("Contact notification email failed:", err);
+      });
+
       // Send success response
       res.status(200).json({ 
         success: true, 
@@ -54,6 +60,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Save to database
       const booking = await storage.createBooking(bookingData.data);
       
+      // Send notification email (best-effort)
+      await sendBookingNotification(bookingData.data).catch((err) => {
+        console.error("Booking notification email failed:", err);
+      });
+
       // Send success response
       res.status(201).json({ 
         success: true, 

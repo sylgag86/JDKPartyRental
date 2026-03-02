@@ -25,11 +25,28 @@ export function smoothScrollTo(elementId: string): void {
   }
 }
 
-// Utility function to handle email submission
-export async function submitContactForm(formData: any) {
-  // In a real implementation, this would send data to the server
-  // For now, we'll simulate a successful submission
-  return new Promise((resolve) => {
+type ContactFormData = {
+  name: string;
+  email: string;
+  phone: string;
+  eventType: string;
+  eventDate: string;
+  eventLocation: string;
+  message?: string;
+};
+
+type ContactFormResponse = {
+  success: boolean;
+  message: string;
+};
+
+// Utility function to handle contact form submission
+export async function submitContactForm(formData: ContactFormData): Promise<ContactFormResponse> {
+  // In a real implementation, this would send data to the server.
+  // For now, we keep a typed mock response so TS checks pass reliably.
+  void formData;
+
+  return new Promise<ContactFormResponse>((resolve) => {
     setTimeout(() => {
       resolve({ success: true, message: 'Form submitted successfully!' });
     }, 1000);

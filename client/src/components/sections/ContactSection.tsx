@@ -71,7 +71,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="book-now" className="py-16 md:py-24 bg-[hsl(var(--dark-bg2))] content-above-particles">
+    <section id="contact" className="py-16 md:py-24 bg-[hsl(var(--dark-bg2))] content-above-particles">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Booking Form */}

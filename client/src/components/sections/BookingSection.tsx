@@ -3,7 +3,7 @@ import { Container } from "@/components/ui/container";
 import { Heading } from "@/components/ui/heading";
 import { NeonButton } from "@/components/ui/NeonButton";
 import { Calendar } from "@/components/ui/calendar";
-import { format, addDays, addMonths, startOfDay, getHours, getDay, isBefore, isSameDay, setHours, setMinutes } from "date-fns";
+import { format, addDays, addMonths, startOfDay, getDay, isSameDay, setHours, setMinutes } from "date-fns";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { z } from 'zod';
@@ -131,10 +131,13 @@ export default function BookingSection() {
   const handleDateSelect = (date: Date | undefined) => {
     if (date) {
       setSelectedDate(date);
+      form.setValue("eventDate", date, { shouldValidate: true });
+      form.setValue("timeSlot", "", { shouldValidate: false });
       // Generate time slots for the selected date
       setTimeSlots(generateTimeSlots(date));
     } else {
       setSelectedDate(undefined);
+      form.setValue("timeSlot", "", { shouldValidate: false });
       setTimeSlots([]);
     }
   };
@@ -142,7 +145,7 @@ export default function BookingSection() {
   // Move to details form after date and time selection
   const handleContinueToDetails = () => {
     const timeSlot = form.getValues("timeSlot");
-    
+
     if (!selectedDate) {
       toast({
         title: "Date Required",
@@ -151,7 +154,7 @@ export default function BookingSection() {
       });
       return;
     }
-    
+
     if (!timeSlot) {
       toast({
         title: "Time Required",
@@ -160,7 +163,17 @@ export default function BookingSection() {
       });
       return;
     }
-    
+
+    const selectedSlot = timeSlots.find((slot) => slot.value === timeSlot);
+    if (!selectedSlot || selectedSlot.disabled) {
+      toast({
+        title: "Invalid Time Slot",
+        description: "Please choose an available time slot.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setBookingStep('details');
   };
   
@@ -174,24 +187,19 @@ export default function BookingSection() {
     setIsSubmitting(true);
     
     try {
-      // Format the event date with the selected time slot
-      const [hours, minutes] = data.timeSlot.split(':').map(Number);
-      const eventDateTime = setHours(setMinutes(data.eventDate, minutes), hours);
-      
-      // Prepare the booking data
+      // Keep DB payload aligned with shared booking schema (date column + message field)
       const bookingData = {
         name: data.name,
         email: data.email,
         phone: data.phone,
         eventType: data.eventType,
-        eventDate: eventDateTime.toISOString(),
+        eventDate: format(data.eventDate, "yyyy-MM-dd"),
         eventLocation: data.eventLocation,
-        additionalNotes: data.additionalNotes || "",
-        status: "pending"
+        message: data.additionalNotes || "",
       };
       
       // Send booking to backend
-      const response = await apiRequest('/api/bookings', 'POST', bookingData);
+      await apiRequest('/api/bookings', 'POST', bookingData);
       
       // Handle successful booking
       setBookingComplete(true);
