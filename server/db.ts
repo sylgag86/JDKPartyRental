@@ -6,16 +6,17 @@ import * as schema from "@shared/schema";
 // Needed for Neon database in serverless environments
 neonConfig.webSocketConstructor = ws;
 
-// Verify we have a database URL
-if (!process.env.DATABASE_URL) {
-  throw new Error(
-    "DATABASE_URL must be set. Did you forget to provision a database?",
-  );
+export const hasDatabase = Boolean(process.env.DATABASE_URL);
+
+// Create and export the database connection only if DATABASE_URL is configured
+export const pool = hasDatabase
+  ? new Pool({ connectionString: process.env.DATABASE_URL })
+  : null;
+
+export const db = pool ? drizzle(pool, { schema }) : null;
+
+if (hasDatabase) {
+  console.log("Database connection established");
+} else {
+  console.warn("DATABASE_URL not set. Falling back to in-memory storage.");
 }
-
-// Create and export the database connection
-export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-export const db = drizzle(pool, { schema });
-
-// Log when the connection is established
-console.log("Database connection established");
