@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Helmet } from "react-helmet";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import HeroSection from "@/components/sections/HeroSection";
@@ -40,6 +41,25 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[hsl(var(--dark-bg))]">
+      <Helmet>
+        <title>JDK Party Rentals LLC | 360° Photo Booth & Event Rentals in Central Florida</title>
+        <meta
+          name="description"
+          content="JDK Party Rentals LLC provides 360° photo booth experiences and event rentals across Central Florida. Book birthdays, weddings, school events, and corporate parties."
+        />
+        <meta
+          name="keywords"
+          content="JDK Party Rentals, 360 photo booth, party rentals, Winter Haven, Central Florida, wedding photo booth, event rentals"
+        />
+        <meta property="og:title" content="JDK Party Rentals LLC | 360° Photo Booth & Event Rentals" />
+        <meta
+          property="og:description"
+          content="Create unforgettable memories with JDK Party Rentals LLC. Serving Winter Haven and Central Florida with premium 360° photo booth experiences."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://jdkpartyrentals.com/" />
+        <link rel="canonical" href="https://jdkpartyrentals.com/" />
+      </Helmet>
       <Particles />
       <Navbar />
       <main className="pt-[85px]"> {/* This padding creates space for the fixed navbar */}
