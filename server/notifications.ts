@@ -1,4 +1,4 @@
-import sgMail from "@sendgrid/mail";
+import { Resend } from "resend";
 
 type BookingNotificationInput = {
   name: string;
@@ -13,20 +13,18 @@ type BookingNotificationInput = {
 type ContactNotificationInput = BookingNotificationInput;
 
 const bookingInbox = process.env.BOOKING_NOTIFICATION_EMAIL || "jdkpartyrentalsllc@gmail.com";
-const fromEmail = process.env.SENDGRID_FROM_EMAIL || bookingInbox;
+const fromEmail = process.env.RESEND_FROM_EMAIL || bookingInbox;
 
-const hasSendgrid = Boolean(process.env.SENDGRID_API_KEY);
-if (hasSendgrid) {
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
-}
+const resendApiKey = process.env.RESEND_API_KEY;
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 async function sendEmail(subject: string, text: string, html: string) {
-  if (!hasSendgrid) {
-    console.warn("SENDGRID_API_KEY not set. Skipping notification email.");
+  if (!resend) {
+    console.warn("RESEND_API_KEY not set. Skipping notification email.");
     return;
   }
 
-  await sgMail.send({
+  await resend.emails.send({
     to: bookingInbox,
     from: fromEmail,
     subject,
