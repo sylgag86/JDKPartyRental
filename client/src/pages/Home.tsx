@@ -57,8 +57,8 @@ export default function Home() {
           content="Create unforgettable memories with JDK Party Rentals LLC. Serving Winter Haven and Central Florida with premium 360° photo booth experiences."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://jdkpartyrentals.com/" />
-        <link rel="canonical" href="https://jdkpartyrentals.com/" />
+        <meta property="og:url" content="https://www.jdkpartyrentalsllc.com/" />
+        <link rel="canonical" href="https://www.jdkpartyrentalsllc.com/" />
       </Helmet>
       <Particles />
       <Navbar />

@@ -22,9 +22,9 @@ export default function About() {
         <meta property="og:title" content="JDK Party Rentals LLC - Premier Party Rental Supplier in Central Florida" />
         <meta property="og:description" content="Central Florida's premier party rental service offering 360° photo booths, event equipment, and exceptional customer service." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://jdkpartyrentals.com/about" />
-        <meta property="og:image" content="/images/jdk-party-rentals-og.jpg" />
-        <link rel="canonical" href="https://jdkpartyrentals.com/about" />
+        <meta property="og:url" content="https://www.jdkpartyrentalsllc.com/about" />
+        <meta property="og:image" content="/assets/gallery/IMG_0574.jpeg" />
+        <link rel="canonical" href="https://www.jdkpartyrentalsllc.com/about" />
       </Helmet>
       
       <Navbar />
@@ -141,8 +141,8 @@ export default function About() {
               <div className="order-1 lg:order-2 relative">
                 <div className="relative mx-auto max-w-md">
                   <img 
-                    src="https://images.unsplash.com/photo-1525268323446-0505b6fe7778?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
-                    alt="JDK Party Rentals Team" 
+                    src="/assets/gallery/IMG_0573.jpeg" 
+                    alt="JDK Party Rentals team and setup" 
                     className="rounded-xl shadow-2xl relative z-10" 
                   />
                   
