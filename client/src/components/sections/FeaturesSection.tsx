@@ -31,22 +31,29 @@ export default function FeaturesSection() {
             </div>
           </div>
           
-          {/* Feature Image */}
+          {/* Feature Video Placeholder */}
           <div className="order-1 lg:order-2 relative">
             <div className="relative mx-auto max-w-md">
-              <img 
-                src="/assets/gallery/IMG_0574.jpeg" 
-                alt="JDK 360 photo booth setup" 
-                className="rounded-xl shadow-2xl relative z-10" 
-              />
-              
-              {/* Rotating platform animation */}
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-16 bg-[hsl(var(--neon-blue))] rounded-full blur-xl opacity-30 rotate-platform z-0"></div>
-              
+              <div className="relative rounded-xl border border-[hsla(var(--neon-blue)/0.35)] bg-[hsl(var(--dark-bg2))] overflow-hidden shadow-2xl">
+                <img
+                  src="/assets/gallery/IMG_0574.jpeg"
+                  alt="Video preview placeholder"
+                  className="w-full h-auto opacity-70"
+                />
+
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-gradient-to-t from-[hsla(var(--dark-bg)/0.9)] via-[hsla(var(--dark-bg)/0.35)] to-transparent">
+                  <div className="w-16 h-16 rounded-full bg-[hsla(var(--neon-pink)/0.85)] flex items-center justify-center mb-4 shadow-neon-pink">
+                    <i className="fas fa-play text-white text-xl ml-1"></i>
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-1">Video Coming Next</h3>
+                  <p className="text-gray-200 text-sm">Upload your event reel and I’ll embed it here.</p>
+                </div>
+              </div>
+
               {/* Glow Effect */}
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[hsl(var(--neon-purple))] to-[hsl(var(--neon-blue))] opacity-30 blur-xl -z-10"></div>
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[hsl(var(--neon-purple))] to-[hsl(var(--neon-blue))] opacity-25 blur-xl -z-10"></div>
             </div>
-            
+
             {/* Floating elements */}
             <div className="absolute -top-10 -left-10 w-20 h-20 rounded-full bg-[hsl(var(--neon-pink))] opacity-20 blur-lg"></div>
             <div className="absolute -bottom-5 right-1/4 w-32 h-32 rounded-full bg-[hsl(var(--neon-gold))] opacity-20 blur-lg"></div>
