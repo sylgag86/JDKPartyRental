@@ -10,7 +10,7 @@ export async function sendEmail(subject, text, html) {
   }
 
   const resend = new Resend(apiKey);
-  await resend.emails.send({
+  const { data, error } = await resend.emails.send({
     from: fromEmail,
     to: bookingInbox,
     subject,
@@ -18,6 +18,15 @@ export async function sendEmail(subject, text, html) {
     html,
     replyTo: bookingInbox,
   });
+
+  if (error) {
+    console.error("Resend API error:", error);
+    throw new Error(error.message || "Resend failed to send email");
+  }
+
+  if (!data?.id) {
+    throw new Error("Resend did not return an email id");
+  }
 }
 
 export function json(res, status, body) {

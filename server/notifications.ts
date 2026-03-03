@@ -24,7 +24,7 @@ async function sendEmail(subject: string, text: string, html: string) {
     return;
   }
 
-  await resend.emails.send({
+  const { data, error } = await resend.emails.send({
     to: bookingInbox,
     from: fromEmail,
     subject,
@@ -32,6 +32,15 @@ async function sendEmail(subject: string, text: string, html: string) {
     html,
     replyTo: bookingInbox,
   });
+
+  if (error) {
+    console.error("Resend API error:", error);
+    throw new Error(error.message || "Resend failed to send email");
+  }
+
+  if (!data?.id) {
+    throw new Error("Resend did not return an email id");
+  }
 }
 
 export async function sendBookingNotification(data: BookingNotificationInput) {
