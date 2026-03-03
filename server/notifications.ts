@@ -13,12 +13,12 @@ type BookingNotificationInput = {
 type ContactNotificationInput = BookingNotificationInput;
 
 const bookingInbox = process.env.BOOKING_NOTIFICATION_EMAIL || "jdkpartyrentalsllc@gmail.com";
-const fromEmail = process.env.RESEND_FROM_EMAIL || bookingInbox;
+const fromEmail = process.env.RESEND_FROM_EMAIL || "JDK Party Rentals <onboarding@resend.dev>";
 
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
-async function sendEmail(subject: string, text: string, html: string) {
+async function sendEmail(subject: string, text: string, html: string, replyTo?: string) {
   if (!resend) {
     console.warn("RESEND_API_KEY not set. Skipping notification email.");
     return;
@@ -30,7 +30,7 @@ async function sendEmail(subject: string, text: string, html: string) {
     subject,
     text,
     html,
-    replyTo: bookingInbox,
+    replyTo: replyTo || bookingInbox,
   });
 
   if (error) {
@@ -67,7 +67,7 @@ export async function sendBookingNotification(data: BookingNotificationInput) {
     <p><strong>Notes:</strong> ${data.message || "N/A"}</p>
   `;
 
-  await sendEmail(subject, text, html);
+  await sendEmail(subject, text, html, data.email);
 }
 
 export async function sendContactNotification(data: ContactNotificationInput) {
@@ -94,5 +94,5 @@ export async function sendContactNotification(data: ContactNotificationInput) {
     <p><strong>Message:</strong> ${data.message || "N/A"}</p>
   `;
 
-  await sendEmail(subject, text, html);
+  await sendEmail(subject, text, html, data.email);
 }

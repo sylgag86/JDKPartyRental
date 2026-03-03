@@ -1,9 +1,9 @@
 import { Resend } from "resend";
 
 const bookingInbox = process.env.BOOKING_NOTIFICATION_EMAIL || "jdkpartyrentalsllc@gmail.com";
-const fromEmail = process.env.RESEND_FROM_EMAIL || bookingInbox;
+const fromEmail = process.env.RESEND_FROM_EMAIL || "JDK Party Rentals <onboarding@resend.dev>";
 
-export async function sendEmail(subject, text, html) {
+export async function sendEmail(subject, text, html, replyTo) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     throw new Error("RESEND_API_KEY is not set");
@@ -16,7 +16,7 @@ export async function sendEmail(subject, text, html) {
     subject,
     text,
     html,
-    replyTo: bookingInbox,
+    replyTo: replyTo || bookingInbox,
   });
 
   if (error) {

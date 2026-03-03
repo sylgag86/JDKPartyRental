@@ -35,7 +35,7 @@ export default async function handler(req, res) {
       <p><strong>Message:</strong> ${message || "N/A"}</p>
     `;
 
-    await sendEmail(subject, text, html);
+    await sendEmail(subject, text, html, email);
 
     return json(res, 200, {
       success: true,
