@@ -31,23 +31,22 @@ export default function FeaturesSection() {
             </div>
           </div>
           
-          {/* Feature Video Placeholder */}
+          {/* Feature Video */}
           <div className="order-1 lg:order-2 relative">
             <div className="relative mx-auto max-w-md">
               <div className="relative rounded-xl border border-[hsla(var(--neon-blue)/0.35)] bg-[hsl(var(--dark-bg2))] overflow-hidden shadow-2xl">
-                <img
-                  src="/assets/gallery/IMG_0574.jpeg"
-                  alt="Video preview placeholder"
-                  className="w-full h-auto opacity-70"
-                />
-
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-gradient-to-t from-[hsla(var(--dark-bg)/0.9)] via-[hsla(var(--dark-bg)/0.35)] to-transparent">
-                  <div className="w-16 h-16 rounded-full bg-[hsla(var(--neon-pink)/0.85)] flex items-center justify-center mb-4 shadow-neon-pink">
-                    <i className="fas fa-play text-white text-xl ml-1"></i>
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-1">Video Coming Next</h3>
-                  <p className="text-gray-200 text-sm">Upload your event reel and I’ll embed it here.</p>
-                </div>
+                <video
+                  src="/assets/video/jdk-highlight-loop.mp4"
+                  className="w-full h-auto"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  controls
+                  preload="metadata"
+                >
+                  Your browser does not support the video tag.
+                </video>
               </div>
 
               {/* Glow Effect */}
