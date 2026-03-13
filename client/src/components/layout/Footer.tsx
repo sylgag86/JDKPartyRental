@@ -21,15 +21,6 @@ export default function Footer() {
             </p>
             <div className="flex gap-4">
               <a 
-                href="https://www.instagram.com/jdkpartyrentalsllc" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-[hsl(var(--dark-bg))] rounded-full flex items-center justify-center text-white hover:bg-[hsl(var(--neon-pink))] transition-colors"
-                aria-label="Instagram"
-              >
-                <i className="fab fa-instagram"></i>
-              </a>
-              <a 
                 href="https://www.facebook.com/JDKPartyRentalsllc" 
                 target="_blank" 
                 rel="noopener noreferrer"
@@ -38,7 +29,6 @@ export default function Footer() {
               >
                 <i className="fab fa-facebook-f"></i>
               </a>
-
             </div>
           </div>
           
@@ -161,14 +151,14 @@ export default function Footer() {
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <i className="fab fa-instagram text-[hsl(var(--neon-purple))]"></i>
+                <i className="fab fa-facebook-f text-[hsl(var(--neon-purple))]"></i>
                 <a 
-                  href="https://www.instagram.com/jdkpartyrentalsllc" 
+                  href="https://www.facebook.com/JDKPartyRentalsllc" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-[hsl(var(--neon-purple))] transition-colors"
                 >
-                  @jdkpartyrentalsllc
+                  JDK Party Rentals LLC
                 </a>
               </li>
               <li className="flex items-center gap-3">
