@@ -23,27 +23,16 @@ export default function GallerySection() {
     setModalOpen(false);
   }, []);
 
-  // Lock/unlock scroll + block touch scrolling on the modal
+  // Lock/unlock scroll — only touch overflow-y, never overflow-x
   useEffect(() => {
-    if (!modalOpen) return;
+    if (modalOpen) {
+      document.body.style.overflowY = 'hidden';
+      document.documentElement.style.overflowY = 'hidden';
+    }
 
-    // Lock scroll
-    const scrollY = window.scrollY;
-    document.body.style.overflow = 'hidden';
-    document.documentElement.style.overflow = 'hidden';
-
-    // Block touch-scroll on mobile while modal is open
-    const preventScroll = (e: TouchEvent) => {
-      e.preventDefault();
-    };
-    document.addEventListener('touchmove', preventScroll, { passive: false });
-
-    // Cleanup: unlock scroll on close OR unmount
     return () => {
-      document.removeEventListener('touchmove', preventScroll);
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
-      window.scrollTo(0, scrollY);
+      document.body.style.overflowY = '';
+      document.documentElement.style.overflowY = '';
     };
   }, [modalOpen]);
 
@@ -105,18 +94,17 @@ export default function GallerySection() {
       {modalOpen && (
         <div
           className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
+          style={{ overscrollBehavior: 'contain' }}
           onClick={closeModal}
         >
-          {/* Close button - big and easy to tap on mobile */}
           <button
-            className="absolute top-4 right-4 text-white text-4xl z-10 w-12 h-12 flex items-center justify-center"
+            className="absolute top-4 right-4 text-white text-4xl z-10 w-14 h-14 flex items-center justify-center"
             onClick={closeModal}
             aria-label="Close"
           >
             <i className="fas fa-times"></i>
           </button>
 
-          {/* Image content - stop click from bubbling so tapping image doesn't close */}
           <div
             className="max-w-4xl mx-auto px-4"
             onClick={(e) => e.stopPropagation()}
