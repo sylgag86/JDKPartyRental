@@ -259,19 +259,19 @@ export default function ContactSection() {
                 }
               />
               
-              {/* Instagram */}
+{/* Facebook */}
               <ContactCard
-                icon="fab fa-instagram"
+                icon="fab fa-facebook-f"
                 title="Follow Us"
                 color="purple"
                 content={
                   <a 
-                    href="https://www.instagram.com/jdkpartyrentalsllc" 
+                    href="https://www.facebook.com/JDKPartyRentalsllc" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="hover:text-[hsl(var(--neon-purple))] transition-colors"
                   >
-                    @jdkpartyrentalsllc
+                    JDK Party Rentals LLC
                   </a>
                 }
               />
