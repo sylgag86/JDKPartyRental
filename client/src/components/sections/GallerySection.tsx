@@ -102,16 +102,17 @@ export default function GallerySection() {
             onClick={closeModal}
           />
 
-          {/* Close button - big, clearly visible, above everything */}
+          {/* Close button - pushed below navbar, big and visible */}
           <button
-            className="absolute top-6 right-6 z-[1200] text-white bg-black/60 rounded-full w-14 h-14 flex items-center justify-center text-3xl"
+            className="absolute right-6 z-[1200] text-white bg-red-600 rounded-full w-14 h-14 flex items-center justify-center text-3xl"
+            style={{ top: '100px' }}
             onClick={closeModal}
             aria-label="Close"
           >
             ✕
           </button>
 
-          {/* Image content - centered, doesn't block backdrop clicks */}
+          {/* Image content */}
           <div className="relative z-[1101] flex items-center justify-center h-full pointer-events-none">
             <div className="max-w-4xl mx-auto px-4 pointer-events-auto">
               {selectedImage && (
