@@ -90,39 +90,45 @@ export default function GallerySection() {
         </div>
       </Container>
 
-      {/* Gallery Modal */}
+      {/* Gallery Modal - z-[1100] to sit ABOVE the navbar which is z-[1000] */}
       {modalOpen && (
         <div
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
+          className="fixed inset-0 z-[1100]"
           style={{ overscrollBehavior: 'contain' }}
-          onClick={closeModal}
         >
+          {/* Dark backdrop - tapping this closes the modal */}
+          <div
+            className="absolute inset-0 bg-black/90"
+            onClick={closeModal}
+          />
+
+          {/* Close button - big, clearly visible, above everything */}
           <button
-            className="absolute top-4 right-4 text-white text-4xl z-10 w-14 h-14 flex items-center justify-center"
+            className="absolute top-6 right-6 z-[1200] text-white bg-black/60 rounded-full w-14 h-14 flex items-center justify-center text-3xl"
             onClick={closeModal}
             aria-label="Close"
           >
-            <i className="fas fa-times"></i>
+            ✕
           </button>
 
-          <div
-            className="max-w-4xl mx-auto px-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {selectedImage && (
-              <>
-                <img
-                  src={selectedImage.image}
-                  alt={selectedImage.title}
-                  className="w-full h-auto rounded-xl"
-                  onError={closeModal}
-                />
-                <div className="mt-4 text-center">
-                  <h3 className="text-2xl font-bold text-white">{selectedImage.title}</h3>
-                  <p className="text-gray-300">{selectedImage.description}</p>
-                </div>
-              </>
-            )}
+          {/* Image content - centered, doesn't block backdrop clicks */}
+          <div className="relative z-[1101] flex items-center justify-center h-full pointer-events-none">
+            <div className="max-w-4xl mx-auto px-4 pointer-events-auto">
+              {selectedImage && (
+                <>
+                  <img
+                    src={selectedImage.image}
+                    alt={selectedImage.title}
+                    className="w-full h-auto rounded-xl"
+                    onError={closeModal}
+                  />
+                  <div className="mt-4 text-center">
+                    <h3 className="text-2xl font-bold text-white">{selectedImage.title}</h3>
+                    <p className="text-gray-300">{selectedImage.description}</p>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
       )}
