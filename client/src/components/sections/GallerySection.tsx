@@ -5,33 +5,17 @@ import { GalleryItem } from '@/components/ui/GalleryItem';
 import { NeonButton } from '@/components/ui/NeonButton';
 import { gallery } from '@/data/gallery';
 
-// ── Scroll lock helpers (iOS-safe) ──────────────────────────────
-let savedScrollY = 0;
-
+// ── Scroll lock helpers (simple & safe) ─────────────────────────
 function lockScroll() {
-  savedScrollY = window.scrollY || window.pageYOffset || 0;
   document.body.style.overflow = 'hidden';
   document.documentElement.style.overflow = 'hidden';
-  // iOS Safari needs position:fixed to truly prevent background scroll
-  document.body.style.position = 'fixed';
-  document.body.style.top = `-${savedScrollY}px`;
-  document.body.style.left = '0';
-  document.body.style.right = '0';
-  document.body.style.width = '100%';
   document.body.style.touchAction = 'none';
 }
 
 function unlockScroll() {
   document.body.style.overflow = '';
   document.documentElement.style.overflow = '';
-  document.body.style.position = '';
-  document.body.style.top = '';
-  document.body.style.left = '';
-  document.body.style.right = '';
-  document.body.style.width = '';
   document.body.style.touchAction = '';
-  // Restore the scroll position the user was at before modal opened
-  window.scrollTo(0, savedScrollY);
 }
 
 // ── Component ───────────────────────────────────────────────────
@@ -53,14 +37,13 @@ export default function GallerySection() {
     setModalOpen(false);
   }, []);
 
-  // Lock/unlock scroll when modal state changes, AND clean up on unmount
+  // Lock/unlock scroll when modal state changes + cleanup on unmount
   useEffect(() => {
     if (modalOpen) {
       lockScroll();
     } else {
       unlockScroll();
     }
-    // Critical: if this component unmounts while modal is open, unlock scroll
     return () => unlockScroll();
   }, [modalOpen]);
 
@@ -76,9 +59,8 @@ export default function GallerySection() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [modalOpen, closeModal]);
 
-  // Handle backdrop click (close if they tap outside the image)
+  // Close when tapping the dark backdrop (not the image itself)
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    // Only close if the click is on the backdrop itself, not the image/content
     if (e.target === e.currentTarget) {
       closeModal();
     }
@@ -133,7 +115,7 @@ export default function GallerySection() {
         <div
           className="fixed inset-0 bg-[hsl(var(--dark-bg))] bg-opacity-90 z-50 flex items-center justify-center content-above-particles"
           onClick={handleBackdropClick}
-          style={{ touchAction: 'none' }}
+          style={{ touchAction: 'none', overscrollBehavior: 'none' }}
         >
           <div className="container mx-auto px-4 relative">
             <button
