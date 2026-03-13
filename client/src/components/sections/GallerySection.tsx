@@ -1,10 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Container } from '@/components/ui/container';
 import { Heading } from '@/components/ui/heading';
 import { GalleryItem } from '@/components/ui/GalleryItem';
 import { NeonButton } from '@/components/ui/NeonButton';
 import { gallery } from '@/data/gallery';
 
+// ── Scroll lock helpers (iOS-safe) ──────────────────────────────
+let savedScrollY = 0;
+
+function lockScroll() {
+  savedScrollY = window.scrollY || window.pageYOffset || 0;
+  document.body.style.overflow = 'hidden';
+  document.documentElement.style.overflow = 'hidden';
+  // iOS Safari needs position:fixed to truly prevent background scroll
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${savedScrollY}px`;
+  document.body.style.left = '0';
+  document.body.style.right = '0';
+  document.body.style.width = '100%';
+  document.body.style.touchAction = 'none';
+}
+
+function unlockScroll() {
+  document.body.style.overflow = '';
+  document.documentElement.style.overflow = '';
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.left = '';
+  document.body.style.right = '';
+  document.body.style.width = '';
+  document.body.style.touchAction = '';
+  // Restore the scroll position the user was at before modal opened
+  window.scrollTo(0, savedScrollY);
+}
+
+// ── Component ───────────────────────────────────────────────────
 export default function GallerySection() {
   const [selectedImage, setSelectedImage] = useState<{
     image: string;
@@ -17,12 +47,41 @@ export default function GallerySection() {
   const openModal = (image: string, title: string, description: string) => {
     setSelectedImage({ image, title, description });
     setModalOpen(true);
-    document.body.style.overflow = 'hidden';
   };
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setModalOpen(false);
-    document.body.style.overflow = 'auto';
+  }, []);
+
+  // Lock/unlock scroll when modal state changes, AND clean up on unmount
+  useEffect(() => {
+    if (modalOpen) {
+      lockScroll();
+    } else {
+      unlockScroll();
+    }
+    // Critical: if this component unmounts while modal is open, unlock scroll
+    return () => unlockScroll();
+  }, [modalOpen]);
+
+  // Close on ESC key
+  useEffect(() => {
+    if (!modalOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeModal();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [modalOpen, closeModal]);
+
+  // Handle backdrop click (close if they tap outside the image)
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    // Only close if the click is on the backdrop itself, not the image/content
+    if (e.target === e.currentTarget) {
+      closeModal();
+    }
   };
 
   return (
@@ -71,10 +130,14 @@ export default function GallerySection() {
 
       {/* Gallery Modal */}
       {modalOpen && (
-        <div className="fixed inset-0 bg-[hsl(var(--dark-bg))] bg-opacity-90 z-50 flex items-center justify-center content-above-particles">
+        <div
+          className="fixed inset-0 bg-[hsl(var(--dark-bg))] bg-opacity-90 z-50 flex items-center justify-center content-above-particles"
+          onClick={handleBackdropClick}
+          style={{ touchAction: 'none' }}
+        >
           <div className="container mx-auto px-4 relative">
             <button
-              className="absolute top-4 right-4 text-white text-3xl hover:text-[hsl(var(--neon-pink))] transition-colors"
+              className="absolute top-4 right-4 text-white text-3xl hover:text-[hsl(var(--neon-pink))] transition-colors z-10"
               onClick={closeModal}
               aria-label="Close"
             >
@@ -88,6 +151,7 @@ export default function GallerySection() {
                     src={selectedImage.image}
                     alt={selectedImage.title}
                     className="w-full h-auto rounded-xl"
+                    onError={closeModal}
                   />
                   <div className="mt-4 text-center">
                     <h3 className="text-2xl font-bold text-white">{selectedImage.title}</h3>
