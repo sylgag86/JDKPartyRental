@@ -266,7 +266,7 @@ export default function ContactSection() {
                 color="purple"
                 content={
                   <a 
-                    href="https://www.facebook.com/JDKPartyRentalsllc" 
+                    href="https://www.facebook.com/p/JDK-Party-Rentals-LLC-100089247457004/" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="hover:text-[hsl(var(--neon-purple))] transition-colors"
