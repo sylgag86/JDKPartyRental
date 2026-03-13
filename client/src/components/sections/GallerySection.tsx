@@ -5,20 +5,6 @@ import { GalleryItem } from '@/components/ui/GalleryItem';
 import { NeonButton } from '@/components/ui/NeonButton';
 import { gallery } from '@/data/gallery';
 
-// ── Scroll lock helpers (simple & safe) ─────────────────────────
-function lockScroll() {
-  document.body.style.overflow = 'hidden';
-  document.documentElement.style.overflow = 'hidden';
-  document.body.style.touchAction = 'none';
-}
-
-function unlockScroll() {
-  document.body.style.overflow = '';
-  document.documentElement.style.overflow = '';
-  document.body.style.touchAction = '';
-}
-
-// ── Component ───────────────────────────────────────────────────
 export default function GallerySection() {
   const [selectedImage, setSelectedImage] = useState<{
     image: string;
@@ -37,34 +23,39 @@ export default function GallerySection() {
     setModalOpen(false);
   }, []);
 
-  // Lock/unlock scroll when modal state changes + cleanup on unmount
+  // Lock/unlock scroll + block touch scrolling on the modal
   useEffect(() => {
-    if (modalOpen) {
-      lockScroll();
-    } else {
-      unlockScroll();
-    }
-    return () => unlockScroll();
+    if (!modalOpen) return;
+
+    // Lock scroll
+    const scrollY = window.scrollY;
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+
+    // Block touch-scroll on mobile while modal is open
+    const preventScroll = (e: TouchEvent) => {
+      e.preventDefault();
+    };
+    document.addEventListener('touchmove', preventScroll, { passive: false });
+
+    // Cleanup: unlock scroll on close OR unmount
+    return () => {
+      document.removeEventListener('touchmove', preventScroll);
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      window.scrollTo(0, scrollY);
+    };
   }, [modalOpen]);
 
   // Close on ESC key
   useEffect(() => {
     if (!modalOpen) return;
-
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') closeModal();
     };
-
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [modalOpen, closeModal]);
-
-  // Close when tapping the dark backdrop (not the image itself)
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      closeModal();
-    }
-  };
 
   return (
     <section id="gallery" className="py-16 md:py-24 bg-[hsl(var(--dark-bg2))] content-above-particles">
@@ -113,35 +104,37 @@ export default function GallerySection() {
       {/* Gallery Modal */}
       {modalOpen && (
         <div
-          className="fixed inset-0 bg-[hsl(var(--dark-bg))] bg-opacity-90 z-50 flex items-center justify-center content-above-particles"
-          onClick={handleBackdropClick}
-          style={{ touchAction: 'none', overscrollBehavior: 'none' }}
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
+          onClick={closeModal}
         >
-          <div className="container mx-auto px-4 relative">
-            <button
-              className="absolute top-4 right-4 text-white text-3xl hover:text-[hsl(var(--neon-pink))] transition-colors z-10"
-              onClick={closeModal}
-              aria-label="Close"
-            >
-              <i className="fas fa-times"></i>
-            </button>
+          {/* Close button - big and easy to tap on mobile */}
+          <button
+            className="absolute top-4 right-4 text-white text-4xl z-10 w-12 h-12 flex items-center justify-center"
+            onClick={closeModal}
+            aria-label="Close"
+          >
+            <i className="fas fa-times"></i>
+          </button>
 
-            <div className="max-w-4xl mx-auto">
-              {selectedImage && (
-                <>
-                  <img
-                    src={selectedImage.image}
-                    alt={selectedImage.title}
-                    className="w-full h-auto rounded-xl"
-                    onError={closeModal}
-                  />
-                  <div className="mt-4 text-center">
-                    <h3 className="text-2xl font-bold text-white">{selectedImage.title}</h3>
-                    <p className="text-gray-300">{selectedImage.description}</p>
-                  </div>
-                </>
-              )}
-            </div>
+          {/* Image content - stop click from bubbling so tapping image doesn't close */}
+          <div
+            className="max-w-4xl mx-auto px-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {selectedImage && (
+              <>
+                <img
+                  src={selectedImage.image}
+                  alt={selectedImage.title}
+                  className="w-full h-auto rounded-xl"
+                  onError={closeModal}
+                />
+                <div className="mt-4 text-center">
+                  <h3 className="text-2xl font-bold text-white">{selectedImage.title}</h3>
+                  <p className="text-gray-300">{selectedImage.description}</p>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}
