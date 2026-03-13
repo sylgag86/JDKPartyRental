@@ -21,7 +21,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-4">
               <a 
-                href="https://www.facebook.com/JDKPartyRentalsllc" 
+                href="https://www.facebook.com/p/JDK-Party-Rentals-LLC-100089247457004/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-[hsl(var(--dark-bg))] rounded-full flex items-center justify-center text-white hover:bg-[hsl(var(--neon-blue))] transition-colors"
@@ -153,7 +153,7 @@ export default function Footer() {
               <li className="flex items-center gap-3">
                 <i className="fab fa-facebook-f text-[hsl(var(--neon-purple))]"></i>
                 <a 
-                  href="https://www.facebook.com/JDKPartyRentalsllc" 
+                  href="https://www.facebook.com/p/JDK-Party-Rentals-LLC-100089247457004/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-[hsl(var(--neon-purple))] transition-colors"
