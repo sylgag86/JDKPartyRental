@@ -6,7 +6,7 @@ import heroImage from '@assets/image_1745537376694.png';
 
 export default function HeroSection() {
   const handleLearnMore = () => {
-    smoothScrollTo('services');
+    smoothScrollTo('faq');
   };
 
   const handleBookNow = () => {

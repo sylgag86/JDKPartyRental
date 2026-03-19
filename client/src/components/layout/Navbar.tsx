@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'wouter';
 import { Container } from "@/components/ui/container";
 import { NeonButton } from "@/components/ui/NeonButton";
 import { smoothScrollTo } from '@/lib/utils';
 
 export default function Navbar() {
+  const [, setLocation] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -61,7 +63,7 @@ export default function Navbar() {
   // Close mobile menu when clicking a link
   const handleNavClick = (id: string) => {
     if (id === 'about') {
-      window.location.href = '/about';
+      setLocation('/about');
     } else {
       smoothScrollTo(id);
     }
