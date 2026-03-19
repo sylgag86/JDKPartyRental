@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn, smoothScrollTo } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 
 interface ServiceCardProps {
   icon: string;
@@ -53,7 +53,7 @@ export function ServiceCard({
       onClick={onClick}
     >
       <div className={cn(
-        "absolute inset-0 bg-gradient-to-b opacity-0 group-hover:opacity-10 transition-opacity duration-300",
+        "absolute inset-0 bg-gradient-to-b opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none",
         colorClasses[color].gradient
       )}></div>
       
@@ -75,8 +75,8 @@ export function ServiceCard({
         {description}
       </p>
       
-      <a href="#faq" onClick={(e) => { e.preventDefault(); e.stopPropagation(); smoothScrollTo('faq'); }} className={cn(
-        "inline-block font-semibold hover:underline",
+      <a href="#faq" className={cn(
+        "relative z-10 inline-block font-semibold hover:underline",
         colorClasses[color].icon
       )}>
         Learn More <i className="fas fa-arrow-right ml-1"></i>
