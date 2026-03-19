@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from '@/lib/utils';
+import { cn, smoothScrollTo } from '@/lib/utils';
 
 interface ServiceCardProps {
   icon: string;
@@ -75,7 +75,7 @@ export function ServiceCard({
         {description}
       </p>
       
-      <a href="#faq" onClick={(e) => { e.stopPropagation(); }} className={cn(
+      <a href="#faq" onClick={(e) => { e.preventDefault(); e.stopPropagation(); smoothScrollTo('faq'); }} className={cn(
         "inline-block font-semibold hover:underline",
         colorClasses[color].icon
       )}>
